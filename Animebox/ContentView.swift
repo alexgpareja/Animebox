@@ -2,79 +2,41 @@
 //  ContentView.swift
 //  Animebox
 //
-//  Created by Alex on 08/06/2026.
-//
 
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
-    var body: some View {
-        NavigationViewWrapper {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
+enum AppTab: Hashable {
+    case home, search, library
 }
 
-fileprivate struct NavigationViewWrapper<Content: View>: View {
-    let content: () -> Content
+struct ContentView: View {
+    @State private var selection: AppTab = .home
 
     var body: some View {
-#if os(macOS)
-        NavigationSplitView {
-            content()
-        } detail: {
-            Text("Select an item")
+        TabView(selection: $selection) {
+            Tab("Inicio", systemImage: "house.fill", value: AppTab.home) {
+                NavigationStack {
+                    HomeView()
+                }
+            }
+            Tab("Buscar", systemImage: "magnifyingglass", value: AppTab.search) {
+                NavigationStack {
+                    SearchView()
+                }
+            }
+            Tab("Biblioteca", systemImage: "books.vertical.fill", value: AppTab.library) {
+                NavigationStack {
+                    LibraryView()
+                }
+            }
         }
-#else
-        content()
-#endif
+        .tint(AppColors.primary)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: LibraryEntry.self, inMemory: true)
+        .preferredColorScheme(.dark)
 }
