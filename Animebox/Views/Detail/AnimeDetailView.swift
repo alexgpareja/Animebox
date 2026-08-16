@@ -11,7 +11,7 @@ struct AnimeDetailView: View {
     @Query private var entries: [LibraryEntry]
     @State private var isPresentingAddSheet = false
 
-    init(anime: Anime, service: JikanServicing = JikanService()) {
+    init(anime: Anime, service: ContentServicing = JikanService()) {
         _viewModel = State(initialValue: AnimeDetailViewModel(initialAnime: anime, service: service))
         let id = anime.malId
         _entries = Query(filter: #Predicate { $0.malId == id })
@@ -20,13 +20,13 @@ struct AnimeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppSpacing.padding) {
-                AnimeDetailHero(anime: viewModel.anime)
+                MediaDetailHero(item: viewModel.anime)
                 AnimeDetailInfoRow(anime: viewModel.anime)
                 AddToLibraryButton(title: libraryButtonTitle) {
                     isPresentingAddSheet = true
                 }
                 if let genres = viewModel.anime.genres, !genres.isEmpty {
-                    AnimeDetailGenres(genres: genres)
+                    MediaDetailGenres(genres: genres)
                 }
                 if let synopsis = viewModel.anime.synopsis, !synopsis.isEmpty {
                     AnimeDetailSynopsis(text: synopsis)
@@ -48,7 +48,7 @@ struct AnimeDetailView: View {
         }
     }
 
-    private var libraryButtonTitle: String {
+    private var libraryButtonTitle: LocalizedStringKey {
         entries.isEmpty ? "Añadir a Mi Biblioteca" : "Editar en Mi Biblioteca"
     }
 }

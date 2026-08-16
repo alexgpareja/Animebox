@@ -18,16 +18,25 @@ final class SearchViewModel {
 
     var query: String = ""
     var statusFilter: SearchStatusFilter = .all
-    private(set) var selectedGenreID: Int?
+    var typeFilter: AnimeTypeFilter = .all
+    var ratingFilter: AnimeRatingFilter = .all
+    var yearFrom: Int?
+    var yearTo: Int?
+    private(set) var selectedGenreIDs: Set<Int> = []
     private(set) var availableGenres: [NamedEntity] = []
+    private(set) var availableThemes: [NamedEntity] = []
     private(set) var isLoadingGenres: Bool = false
     private(set) var state: LoadState = .idle
 
-    private let service: JikanServicing
+    var hasActiveFilters: Bool {
+        statusFilter != .all || typeFilter != .all || ratingFilter != .all || yearFrom != nil || yearTo != nil
+    }
+
+    private let service: ContentServicing
     private let debounce: Duration
     private var searchTask: Task<Void, Never>?
 
-    init(service: JikanServicing = JikanService(), debounce: Duration = .milliseconds(300)) {
+    init(service: ContentServicing = JikanService(), debounce: Duration = .milliseconds(300)) {
         self.service = service
         self.debounce = debounce
     }
@@ -41,7 +50,9 @@ final class SearchViewModel {
         isLoadingGenres = true
         defer { isLoadingGenres = false }
         do {
-            availableGenres = try await service.animeGenres()
+            async let genres = service.animeGenres()
+            async let themes = service.animeThemes()
+            (availableGenres, availableThemes) = try await (genres, themes)
         } catch is CancellationError {
             // ignore
         } catch NetworkError.cancelled {
@@ -53,10 +64,10 @@ final class SearchViewModel {
     }
 
     func toggleGenre(_ id: Int) {
-        if selectedGenreID == id {
-            selectedGenreID = nil
+        if selectedGenreIDs.contains(id) {
+            selectedGenreIDs.remove(id)
         } else {
-            selectedGenreID = id
+            selectedGenreIDs.insert(id)
         }
         search()
     }
@@ -65,11 +76,16 @@ final class SearchViewModel {
         searchTask?.cancel()
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasQuery = !trimmed.isEmpty
-        let hasGenre = selectedGenreID != nil
-        let filter = statusFilter
-        let genreSnapshot = selectedGenreID
+        let hasGenres = !selectedGenreIDs.isEmpty
+        let hasOtherFilters = hasActiveFilters
+        let statusSnapshot = statusFilter
+        let typeSnapshot = typeFilter
+        let ratingSnapshot = ratingFilter
+        let yearFromSnapshot = yearFrom
+        let yearToSnapshot = yearTo
+        let genresSnapshot = selectedGenreIDs
 
-        guard hasQuery || hasGenre else {
+        guard hasQuery || hasGenres || hasOtherFilters else {
             state = .idle
             return
         }
@@ -84,8 +100,12 @@ final class SearchViewModel {
             if Task.isCancelled { return }
             await self.performSearch(
                 query: hasQuery ? trimmed : nil,
-                status: filter.queryValue,
-                genreID: genreSnapshot
+                status: statusSnapshot.queryValue,
+                genreIDs: genresSnapshot,
+                type: typeSnapshot.queryValue,
+                rating: ratingSnapshot.queryValue,
+                yearFrom: yearFromSnapshot,
+                yearTo: yearToSnapshot
             )
         }
     }
@@ -95,13 +115,25 @@ final class SearchViewModel {
         await searchTask?.value
     }
 
-    private func performSearch(query: String?, status: String?, genreID: Int?) async {
+    private func performSearch(
+        query: String?,
+        status: String?,
+        genreIDs: Set<Int>,
+        type: String?,
+        rating: String?,
+        yearFrom: Int?,
+        yearTo: Int?
+    ) async {
         state = .searching
         do {
             let results = try await service.searchAnime(
                 query: query,
                 status: status,
-                genres: genreID.map { [$0] },
+                genres: genreIDs.isEmpty ? nil : Array(genreIDs),
+                type: type,
+                rating: rating,
+                startDate: yearFrom.map { "\($0)-01-01" },
+                endDate: yearTo.map { "\($0)-12-31" },
                 limit: 25
             )
             if Task.isCancelled { return }

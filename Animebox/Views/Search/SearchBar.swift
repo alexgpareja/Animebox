@@ -7,11 +7,11 @@ import SwiftUI
 
 struct SearchBar: View {
     @Binding var text: String
-    var prompt: String = "Buscar anime…"
+    var prompt: LocalizedStringKey = "Buscar anime…"
     var onSubmit: () -> Void = {}
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: AppSpacing.compactSpacing) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
 
@@ -42,6 +42,6 @@ struct SearchBar: View {
                 .strokeBorder(AppColors.cardBackground.opacity(0.6), lineWidth: 1)
         }
         .padding(.horizontal, AppSpacing.padding)
-        .padding(.bottom, 8)
+        .padding(.bottom, AppSpacing.compactSpacing)
     }
 }

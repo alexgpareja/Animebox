@@ -19,6 +19,7 @@ struct LibraryEmptyState: View {
     private var title: LocalizedStringKey {
         switch status {
         case .watching: "Aún no estás viendo nada"
+        case .onHold: "No tienes animes en pausa"
         case .completed: "Aún no has completado ningún anime"
         case .dropped: "No has abandonado ningún anime"
         case .planned: "Tu lista de pendientes está vacía"
@@ -28,6 +29,7 @@ struct LibraryEmptyState: View {
     private var description: LocalizedStringKey {
         switch status {
         case .watching: "Añade desde el detalle de cualquier anime."
+        case .onHold: "Aquí aparecerán los animes que pongas en pausa."
         case .completed: "Cuando termines un anime, márcalo como completado."
         case .dropped: "Aquí aparecerán los animes que dejes a medias."
         case .planned: "Guarda animes que quieras ver más adelante."
@@ -37,6 +39,7 @@ struct LibraryEmptyState: View {
     private var icon: String {
         switch status {
         case .watching: "play.rectangle"
+        case .onHold: "pause.rectangle"
         case .completed: "checkmark.seal"
         case .dropped: "xmark.bin"
         case .planned: "bookmark"

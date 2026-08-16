@@ -18,9 +18,9 @@ final class AnimeDetailViewModel {
     private(set) var anime: Anime
     private(set) var state: LoadState = .idle
 
-    private let service: JikanServicing
+    private let service: ContentServicing
 
-    init(initialAnime: Anime, service: JikanServicing = JikanService()) {
+    init(initialAnime: Anime, service: ContentServicing = JikanService()) {
         self.anime = initialAnime
         self.service = service
     }

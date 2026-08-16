@@ -5,6 +5,7 @@
 
 import Foundation
 import SwiftData
+import WidgetKit
 
 @MainActor
 struct LibraryStore {
@@ -56,12 +57,20 @@ struct LibraryStore {
             )
             context.insert(entry)
         }
-        try context.save()
+        try save()
     }
 
     func delete(animeId: Int) throws {
         guard let existing = entry(for: animeId) else { return }
         context.delete(existing)
+        try save()
+    }
+
+    /// Guarda el contexto y avisa al widget — expuesto para que
+    /// `LibrarySyncCoordinator` lo use también tras mutar un `LibraryEntry`
+    /// ya obtenido (p. ej. `incrementProgress()`), sin duplicar esta lógica.
+    func save() throws {
         try context.save()
+        WidgetCenter.shared.reloadTimelines(ofKind: "WatchingNowWidget")
     }
 }

@@ -19,9 +19,9 @@ final class HomeViewModel {
     private(set) var currentSeason: [Anime] = []
     private(set) var state: LoadState = .idle
 
-    private let service: JikanServicing
+    private let service: ContentServicing
 
-    init(service: JikanServicing = JikanService()) {
+    init(service: ContentServicing = JikanService()) {
         self.service = service
     }
 

@@ -14,7 +14,7 @@ extension Anime {
         self.init(
             malId: entry.malId,
             url: nil,
-            images: AnimeImages(
+            images: MediaImages(
                 jpg: ImageSet(
                     imageUrl: entry.imageURL,
                     smallImageUrl: entry.imageURL,

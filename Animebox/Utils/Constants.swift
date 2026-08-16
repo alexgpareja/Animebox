@@ -16,8 +16,11 @@ enum AppColors {
 }
 
 enum AppSpacing {
-    static let padding: Double = 16
+    static let microSpacing: Double = 4
+    static let compactSpacing: Double = 8
     static let itemSpacing: Double = 12
+    static let padding: Double = 16
+    static let sectionSpacing: Double = 24
     static let cornerRadius: Double = 12
 }
 

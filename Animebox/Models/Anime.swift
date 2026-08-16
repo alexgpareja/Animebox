@@ -5,10 +5,10 @@
 
 import Foundation
 
-nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable {
+nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable, MediaSummary {
     let malId: Int
     let url: String?
-    let images: AnimeImages
+    let images: MediaImages
     let title: String
     let titleEnglish: String?
     let titleJapanese: String?
@@ -34,6 +34,8 @@ nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable {
         titleEnglish?.isEmpty == false ? (titleEnglish ?? title) : title
     }
 
+    var posterURL: URL? { images.bestURL }
+
     enum CodingKeys: String, CodingKey {
         case malId = "mal_id"
         case url, images, title
@@ -45,7 +47,7 @@ nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
-nonisolated struct AnimeImages: Codable, Hashable, Sendable {
+nonisolated struct MediaImages: Codable, Hashable, Sendable {
     let jpg: ImageSet
     let webp: ImageSet?
 

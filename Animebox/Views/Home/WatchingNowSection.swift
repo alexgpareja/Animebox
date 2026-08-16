@@ -22,12 +22,12 @@ struct WatchingNowSection: View {
                         ForEach(entries) { entry in
                             let anime = Anime(libraryEntry: entry)
                             NavigationLink(value: anime) {
-                                AnimeCard(
-                                    anime: anime,
+                                MediaCard(
+                                    item: anime,
                                     progressLabel: progressLabel(for: entry)
                                 )
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressableCard)
                         }
                     }
                     .padding(.horizontal, AppSpacing.padding)

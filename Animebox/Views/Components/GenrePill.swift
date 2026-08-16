@@ -11,8 +11,8 @@ struct GenrePill: View {
     var body: some View {
         Text(title)
             .font(.caption)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.horizontal, AppSpacing.itemSpacing)
+            .padding(.vertical, AppSpacing.compactSpacing)
             .background(AppColors.cardBackground)
             .foregroundStyle(AppColors.textPrimary)
             .clipShape(.capsule)

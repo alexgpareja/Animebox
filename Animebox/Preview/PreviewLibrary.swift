@@ -16,7 +16,7 @@ enum PreviewLibrary {
         let container: ModelContainer
         do {
             container = try ModelContainer(
-                for: LibraryEntry.self,
+                for: LibraryEntry.self, MangaLibraryEntry.self,
                 configurations: ModelConfiguration(isStoredInMemoryOnly: true)
             )
         } catch {
@@ -24,6 +24,9 @@ enum PreviewLibrary {
         }
         let context = container.mainContext
         for entry in sampleEntries {
+            context.insert(entry)
+        }
+        for entry in sampleMangaEntries {
             context.insert(entry)
         }
         return container
@@ -78,6 +81,41 @@ enum PreviewLibrary {
                 progress: 0,
                 totalEpisodes: 25,
                 animeScore: 8.54
+            )
+        ]
+    }
+
+    static var sampleMangaEntries: [MangaLibraryEntry] {
+        [
+            MangaLibraryEntry(
+                malId: 656,
+                title: "Vagabond",
+                imageURL: "https://cdn.myanimelist.net/images/manga/1/259070l.jpg",
+                status: .reading,
+                chaptersRead: 200,
+                totalChapters: 327,
+                totalVolumes: 37,
+                personalScore: 10,
+                mangaScore: 9.24
+            ),
+            MangaLibraryEntry(
+                malId: 11,
+                title: "Naruto",
+                imageURL: "https://cdn.myanimelist.net/images/manga/3/117681l.jpg",
+                status: .completed,
+                chaptersRead: 700,
+                totalChapters: 700,
+                totalVolumes: 72,
+                personalScore: 8,
+                mangaScore: 7.99
+            ),
+            MangaLibraryEntry(
+                malId: 2,
+                title: "Berserk",
+                imageURL: "https://cdn.myanimelist.net/images/manga/1/157897l.jpg",
+                status: .planned,
+                chaptersRead: 0,
+                mangaScore: 9.46
             )
         ]
     }

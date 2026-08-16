@@ -8,10 +8,10 @@ import SwiftUI
 struct StatTile: View {
     let icon: String
     let value: Text
-    let title: String
+    let title: LocalizedStringKey
 
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: AppSpacing.microSpacing) {
             Image(systemName: icon)
                 .foregroundStyle(AppColors.accent)
             value
@@ -25,6 +25,7 @@ struct StatTile: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, AppSpacing.itemSpacing)
+        .padding(.horizontal, AppSpacing.compactSpacing)
         .background(AppColors.cardBackground)
         .clipShape(.rect(cornerRadius: AppSpacing.cornerRadius))
     }

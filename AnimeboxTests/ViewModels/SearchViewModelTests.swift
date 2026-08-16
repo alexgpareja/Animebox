@@ -84,18 +84,24 @@ struct SearchViewModelTests {
         }
     }
 
-    @Test("loadGenres rellena availableGenres en happy path")
+    @Test("loadGenres rellena availableGenres y availableThemes en happy path")
     func loadGenresHappyPath() async {
-        let stub = JikanServiceStub(genres: [
-            NamedEntity(malId: 1, type: "anime", name: "Action", url: nil),
-            NamedEntity(malId: 2, type: "anime", name: "Adventure", url: nil)
-        ])
+        let stub = JikanServiceStub(
+            genres: [
+                NamedEntity(malId: 1, type: "anime", name: "Action", url: nil),
+                NamedEntity(malId: 2, type: "anime", name: "Adventure", url: nil)
+            ],
+            themes: [
+                NamedEntity(malId: 62, type: "anime", name: "Isekai", url: nil)
+            ]
+        )
         let sut = SearchViewModel(service: stub, debounce: .zero)
 
         await sut.loadGenres()
 
         #expect(sut.availableGenres.count == 2)
         #expect(sut.availableGenres.first?.name == "Action")
+        #expect(sut.availableThemes.map(\.name) == ["Isekai"])
         #expect(sut.isLoadingGenres == false)
     }
 
@@ -105,10 +111,41 @@ struct SearchViewModelTests {
         let sut = SearchViewModel(service: stub, debounce: .zero)
 
         sut.toggleGenre(5)
-        #expect(sut.selectedGenreID == 5)
+        #expect(sut.selectedGenreIDs == [5])
 
         sut.toggleGenre(5)
-        #expect(sut.selectedGenreID == nil)
+        #expect(sut.selectedGenreIDs.isEmpty)
+    }
+
+    @Test("Cambiar solo el filtro de tipo (sin query ni género) ejecuta el servicio")
+    func searchByTypeFilterOnly() async {
+        let stub = JikanServiceStub(searchResults: [.fixture(id: 1, title: "Una película")])
+        let sut = SearchViewModel(service: stub, debounce: .zero)
+
+        sut.typeFilter = .movie
+        sut.search()
+        await sut.awaitCurrentSearch()
+
+        guard case .results(let items) = sut.state else {
+            Issue.record("Esperaba .results, obtuve \(sut.state)")
+            return
+        }
+        #expect(items.count == 1)
+    }
+
+    @Test("Cambiar solo el filtro de año (sin query ni género) ejecuta el servicio")
+    func searchByYearFilterOnly() async {
+        let stub = JikanServiceStub(searchResults: [.fixture(id: 1)])
+        let sut = SearchViewModel(service: stub, debounce: .zero)
+
+        sut.yearFrom = 2020
+        sut.search()
+        await sut.awaitCurrentSearch()
+
+        guard case .results = sut.state else {
+            Issue.record("Esperaba .results, obtuve \(sut.state)")
+            return
+        }
     }
 
     @Test("Búsqueda solo por género (sin query) ejecuta el servicio")
@@ -151,16 +188,19 @@ struct SearchViewModelTests {
         #expect(sut.state == .idle)
     }
 
-    @Test("toggleGenre con un id distinto cambia la selección al nuevo género")
-    func toggleGenreSwitchesSelection() async {
+    @Test("toggleGenre con varios ids acumula la selección (filtro AND)")
+    func toggleGenreAccumulatesMultipleSelections() async {
         let stub = JikanServiceStub(searchResults: [])
         let sut = SearchViewModel(service: stub, debounce: .zero)
 
         sut.toggleGenre(1)
-        #expect(sut.selectedGenreID == 1)
+        #expect(sut.selectedGenreIDs == [1])
 
         sut.toggleGenre(2)
-        #expect(sut.selectedGenreID == 2)
+        #expect(sut.selectedGenreIDs == [1, 2])
+
+        sut.toggleGenre(1)
+        #expect(sut.selectedGenreIDs == [2])
     }
 
     @Test("loadGenres no vuelve a llamar al servicio si los géneros ya estaban cargados")

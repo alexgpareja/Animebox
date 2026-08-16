@@ -1,0 +1,40 @@
+# Xcode
+#
+build/
+DerivedData/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# CocoaPods (uncomment if the project starts using it)
+# Pods/
+
+# macOS
+.DS_Store
+
+# Secretos (client_id/secret de la API de MAL) — nunca en git
+Animebox/Config/Secrets.xcconfig
+
+# Fastlane (uncomment if the project starts using it)
+# fastlane/report.xml
+# fastlane/Preview.html
+# fastlane/screenshots/**/*.png
+# fastlane/test_output

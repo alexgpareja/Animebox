@@ -8,28 +8,41 @@ import SwiftUI
 struct SearchContent: View {
     let state: SearchViewModel.LoadState
     let availableGenres: [NamedEntity]
-    let selectedGenreID: Int?
+    let availableThemes: [NamedEntity]
+    let selectedGenreIDs: Set<Int>
     let isLoadingGenres: Bool
     let currentQuery: String
     let onGenreTap: (Int) -> Void
     let retry: () -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            if !availableGenres.isEmpty {
-                GenreChipsRow(
-                    genres: availableGenres,
-                    selectedID: selectedGenreID,
-                    onTap: onGenreTap
+        ScrollView {
+            VStack(spacing: 0) {
+                if !availableGenres.isEmpty {
+                    GenreChipsRow(
+                        title: "Géneros",
+                        genres: availableGenres,
+                        selectedIDs: selectedGenreIDs,
+                        onTap: onGenreTap
+                    )
+                }
+                if !availableThemes.isEmpty {
+                    GenreChipsRow(
+                        title: "Temas",
+                        genres: availableThemes,
+                        selectedIDs: selectedGenreIDs,
+                        onTap: onGenreTap
+                    )
+                }
+                SearchStateView(
+                    state: state,
+                    currentQuery: currentQuery,
+                    hasGenresLoaded: !availableGenres.isEmpty,
+                    isLoadingGenres: isLoadingGenres,
+                    retry: retry
                 )
             }
-            SearchStateView(
-                state: state,
-                currentQuery: currentQuery,
-                hasGenresLoaded: !availableGenres.isEmpty,
-                isLoadingGenres: isLoadingGenres,
-                retry: retry
-            )
         }
+        .scrollDismissesKeyboard(.interactively)
     }
 }

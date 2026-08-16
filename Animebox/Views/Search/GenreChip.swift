@@ -14,15 +14,15 @@ struct GenreChip: View {
         Button(action: action) {
             Text(title)
                 .font(.footnote)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
+                .padding(.horizontal, AppSpacing.itemSpacing)
+                .padding(.vertical, AppSpacing.compactSpacing)
                 .background(isSelected ? AppColors.primary : AppColors.cardBackground)
                 .foregroundStyle(isSelected ? Color.white : AppColors.textPrimary)
                 .clipShape(.capsule)
                 .frame(minHeight: 44)
                 .contentShape(.capsule)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressableCard(scale: 0.94))
         .animation(.easeInOut(duration: 0.2), value: isSelected)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityHint(isSelected ? "Toca para deseleccionar" : "Toca para filtrar por este género")

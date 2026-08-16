@@ -10,6 +10,7 @@ struct AddToLibrarySheet: View {
     let anime: Anime
 
     @Environment(\.modelContext) private var context
+    @Environment(MALSession.self) private var malSession
     @Environment(\.dismiss) private var dismiss
 
     @State private var status: LibraryStatus = .planned
@@ -103,8 +104,8 @@ struct AddToLibrarySheet: View {
     private func prefillIfNeeded() {
         guard !didPrefill else { return }
         didPrefill = true
-        let store = LibraryStore(context: context)
-        guard let existing = store.entry(for: anime.malId) else { return }
+        let coordinator = LibrarySyncCoordinator(context: context, session: malSession)
+        guard let existing = coordinator.libraryStore.entry(for: anime.malId) else { return }
         status = existing.status
         progress = existing.progress
         personalScore = existing.personalScore
@@ -116,9 +117,9 @@ struct AddToLibrarySheet: View {
     }
 
     private func save() {
-        let store = LibraryStore(context: context)
+        let coordinator = LibrarySyncCoordinator(context: context, session: malSession)
         do {
-            try store.upsert(
+            try coordinator.upsertAnime(
                 anime: anime,
                 status: status,
                 progress: progress,

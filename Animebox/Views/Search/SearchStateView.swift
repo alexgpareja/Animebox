@@ -17,12 +17,13 @@ struct SearchStateView: View {
         case .idle:
             SearchIdlePrompt(
                 isLoadingGenres: isLoadingGenres,
-                hasGenresLoaded: hasGenresLoaded
+                hasGenresLoaded: hasGenresLoaded,
+                mediaKind: .anime
             )
         case .searching:
             LoadingView()
         case .results(let items):
-            SearchResultsView(items: items)
+            MediaResultsGrid(items: items)
         case .empty:
             ContentUnavailableView.search(text: currentQuery)
         case .error(let message):
