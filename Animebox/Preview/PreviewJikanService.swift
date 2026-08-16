@@ -8,7 +8,7 @@
 #if DEBUG
 import Foundation
 
-nonisolated struct PreviewJikanService: JikanServicing {
+nonisolated struct PreviewJikanService: ContentServicing {
     func topAnime(limit: Int) async throws -> [Anime] {
         Array(PreviewSamples.animes.prefix(limit))
     }
@@ -17,7 +17,16 @@ nonisolated struct PreviewJikanService: JikanServicing {
         Array(PreviewSamples.animes.reversed().prefix(limit))
     }
 
-    func searchAnime(query: String?, status: String?, genres: [Int]?, limit: Int) async throws -> [Anime] {
+    func searchAnime(
+        query: String?,
+        status: String?,
+        genres: [Int]?,
+        type: String?,
+        rating: String?,
+        startDate: String?,
+        endDate: String?,
+        limit: Int
+    ) async throws -> [Anime] {
         Array(PreviewSamples.animes.prefix(limit))
     }
 
@@ -26,22 +35,50 @@ nonisolated struct PreviewJikanService: JikanServicing {
     }
 
     func animeGenres() async throws -> [NamedEntity] {
-        PreviewSamples.genres
+        MALGenres.animeGenres
+    }
+
+    func animeThemes() async throws -> [NamedEntity] {
+        MALGenres.animeThemes
+    }
+
+    func topManga(limit: Int) async throws -> [Manga] {
+        Array(PreviewSamples.mangas.prefix(limit))
+    }
+
+    func currentlyPublishingManga(limit: Int) async throws -> [Manga] {
+        Array(PreviewSamples.mangas.reversed().prefix(limit))
+    }
+
+    func searchManga(
+        query: String?,
+        status: String?,
+        genres: [Int]?,
+        type: String?,
+        startDate: String?,
+        endDate: String?,
+        limit: Int
+    ) async throws -> [Manga] {
+        Array(PreviewSamples.mangas.prefix(limit))
+    }
+
+    func mangaDetails(id: Int) async throws -> Manga {
+        PreviewSamples.mangas.first(where: { $0.malId == id }) ?? PreviewSamples.mangas[0]
+    }
+
+    func mangaGenres() async throws -> [NamedEntity] {
+        MALGenres.mangaGenres
+    }
+
+    func mangaThemes() async throws -> [NamedEntity] {
+        MALGenres.mangaThemes
     }
 }
 
 nonisolated enum PreviewSamples {
-    static let genres: [NamedEntity] = [
-        NamedEntity(malId: 1, type: "anime", name: "Acción", url: nil),
-        NamedEntity(malId: 2, type: "anime", name: "Aventura", url: nil),
-        NamedEntity(malId: 4, type: "anime", name: "Comedia", url: nil),
-        NamedEntity(malId: 8, type: "anime", name: "Drama", url: nil),
-        NamedEntity(malId: 10, type: "anime", name: "Fantasía", url: nil),
-        NamedEntity(malId: 14, type: "anime", name: "Horror", url: nil),
-        NamedEntity(malId: 22, type: "anime", name: "Romance", url: nil),
-        NamedEntity(malId: 24, type: "anime", name: "Sci-Fi", url: nil),
-        NamedEntity(malId: 30, type: "anime", name: "Deportes", url: nil)
-    ]
+    /// Géneros + temas reales de MAL, para que el preview de la fila de chips
+    /// refleje el volumen real.
+    static let genres: [NamedEntity] = MALGenres.animeGenres + MALGenres.animeThemes
 
     static let animes: [Anime] = [
         sample(id: 5114, title: "Fullmetal Alchemist: Brotherhood", score: 9.10, episodes: 64,
@@ -62,7 +99,7 @@ nonisolated enum PreviewSamples {
         Anime(
             malId: id,
             url: nil,
-            images: AnimeImages(
+            images: MediaImages(
                 jpg: ImageSet(imageUrl: imageURL, smallImageUrl: imageURL, largeImageUrl: imageURL),
                 webp: nil
             ),
@@ -87,6 +124,49 @@ nonisolated enum PreviewSamples {
                 NamedEntity(malId: 2, type: "anime", name: "Aventura", url: nil)
             ],
             studios: nil
+        )
+    }
+
+    static let mangas: [Manga] = [
+        mangaSample(id: 2, title: "Berserk", score: 9.46, chapters: nil, volumes: nil,
+                    imageURL: "https://cdn.myanimelist.net/images/manga/1/157897l.jpg"),
+        mangaSample(id: 656, title: "Vagabond", score: 9.24, chapters: 327, volumes: 37,
+                    imageURL: "https://cdn.myanimelist.net/images/manga/1/259070l.jpg"),
+        mangaSample(id: 11, title: "Naruto", score: 7.99, chapters: 700, volumes: 72,
+                    imageURL: "https://cdn.myanimelist.net/images/manga/3/117681l.jpg"),
+        mangaSample(id: 44347, title: "Chainsaw Man", score: 8.68, chapters: nil, volumes: nil,
+                    imageURL: "https://cdn.myanimelist.net/images/manga/3/216464l.jpg")
+    ]
+
+    private static func mangaSample(
+        id: Int, title: String, score: Double, chapters: Int?, volumes: Int?, imageURL: String
+    ) -> Manga {
+        Manga(
+            malId: id,
+            url: nil,
+            images: MediaImages(
+                jpg: ImageSet(imageUrl: imageURL, smallImageUrl: imageURL, largeImageUrl: imageURL),
+                webp: nil
+            ),
+            title: title,
+            titleEnglish: nil,
+            titleJapanese: nil,
+            type: "Manga",
+            chapters: chapters,
+            volumes: volumes,
+            status: "Publishing",
+            publishing: true,
+            synopsis: "Sinopsis de muestra para el preview de \(title). Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            score: score,
+            scoredBy: 1_000_000,
+            rank: 1,
+            popularity: 1,
+            members: 2_000_000,
+            favorites: 100_000,
+            genres: [
+                NamedEntity(malId: 1, type: "manga", name: "Acción", url: nil),
+                NamedEntity(malId: 2, type: "manga", name: "Aventura", url: nil)
+            ]
         )
     }
 }

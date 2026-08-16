@@ -10,11 +10,18 @@ import SwiftData
 
 @main
 struct AnimeboxApp: App {
+    @State private var malSession = MALSession()
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             LibraryEntry.self,
+            MangaLibraryEntry.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false,
+            groupContainer: .identifier("group.Alexdev.Animebox")
+        )
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -27,6 +34,7 @@ struct AnimeboxApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
+                .environment(malSession)
         }
         .modelContainer(sharedModelContainer)
     }

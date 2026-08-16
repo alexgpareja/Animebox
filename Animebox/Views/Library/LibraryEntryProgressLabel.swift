@@ -10,7 +10,7 @@ struct LibraryEntryProgressLabel: View {
     let total: Int?
 
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: AppSpacing.microSpacing) {
             Image(systemName: "tv")
                 .font(.caption2)
                 .foregroundStyle(AppColors.textSecondary)

@@ -15,7 +15,7 @@ extension Anime {
         Anime(
             malId: id,
             url: nil,
-            images: AnimeImages(
+            images: MediaImages(
                 jpg: ImageSet(imageUrl: nil, smallImageUrl: nil, largeImageUrl: nil),
                 webp: nil
             ),

@@ -1,0 +1,274 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "—" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld / 10" : {
+
+    },
+    "%lld cap." : {
+
+    },
+    "%lld ep." : {
+
+    },
+    "+1" : {
+
+    },
+    "Abandonado" : {
+
+    },
+    "Algo salió mal" : {
+
+    },
+    "Añade desde el detalle de cualquier anime." : {
+
+    },
+    "Añade desde el detalle de cualquier manga." : {
+
+    },
+    "Añadir a Mi Biblioteca" : {
+
+    },
+    "Anime" : {
+
+    },
+    "Anime o manga" : {
+
+    },
+    "Aquí aparecerán los animes que dejes a medias." : {
+
+    },
+    "Aquí aparecerán los mangas que dejes a medias." : {
+
+    },
+    "Aún no estás leyendo nada" : {
+
+    },
+    "Aún no estás viendo nada" : {
+
+    },
+    "Aún no has completado ningún anime" : {
+
+    },
+    "Aún no has completado ningún manga" : {
+
+    },
+    "Biblioteca" : {
+
+    },
+    "Borrar búsqueda" : {
+
+    },
+    "Busca tu próximo anime" : {
+
+    },
+    "Busca tu próximo manga" : {
+
+    },
+    "Buscar" : {
+
+    },
+    "Buscar anime…" : {
+
+    },
+    "Buscar manga…" : {
+
+    },
+    "Cancelar" : {
+
+    },
+    "Capítulo" : {
+
+    },
+    "Capítulos" : {
+
+    },
+    "Cargando" : {
+
+    },
+    "Completado" : {
+
+    },
+    "Cuando termines un anime, márcalo como completado." : {
+
+    },
+    "Cuando termines un manga, márcalo como completado." : {
+
+    },
+    "Editar en Mi Biblioteca" : {
+
+    },
+    "Emitiendo" : {
+
+    },
+    "Empieza a escribir para buscar en MyAnimeList." : {
+
+    },
+    "Empieza por elegir un género" : {
+
+    },
+    "Episodio" : {
+
+    },
+    "Episodios" : {
+
+    },
+    "Error del servidor (%lld)." : {
+
+    },
+    "Estado" : {
+
+    },
+    "Fecha de finalización" : {
+
+    },
+    "Fecha de inicio" : {
+
+    },
+    "Fechas" : {
+
+    },
+    "Filtrar" : {
+
+    },
+    "Finalizado" : {
+
+    },
+    "Géneros" : {
+
+    },
+    "Guarda animes que quieras ver más adelante." : {
+
+    },
+    "Guarda mangas que quieras leer más adelante." : {
+
+    },
+    "Guardar" : {
+
+    },
+    "Has alcanzado el límite de peticiones. Inténtalo de nuevo en unos segundos." : {
+
+    },
+    "Inicio" : {
+
+    },
+    "La URL solicitada no es válida." : {
+
+    },
+    "Leyendo" : {
+
+    },
+    "Leyendo actualmente" : {
+
+    },
+    "Manga" : {
+
+    },
+    "Mi entrada" : {
+
+    },
+    "No has abandonado ningún anime" : {
+
+    },
+    "No has abandonado ningún manga" : {
+
+    },
+    "No pudimos procesar la respuesta del servidor." : {
+
+    },
+    "No se pudo guardar" : {
+
+    },
+    "No se pudo guardar el cambio" : {
+
+    },
+    "Notas" : {
+
+    },
+    "Notas (opcional)" : {
+
+    },
+    "O escribe en la barra de búsqueda para encontrar un anime concreto." : {
+
+    },
+    "O escribe en la barra de búsqueda para encontrar un manga concreto." : {
+
+    },
+    "OK" : {
+
+    },
+    "Petición cancelada." : {
+
+    },
+    "Planeado" : {
+
+    },
+    "Progreso" : {
+
+    },
+    "Próximamente" : {
+
+    },
+    "Publicándose" : {
+
+    },
+    "Puntuación" : {
+
+    },
+    "Puntuación personal" : {
+
+    },
+    "Reintentar" : {
+
+    },
+    "Respuesta inesperada del servidor." : {
+
+    },
+    "Score" : {
+
+    },
+    "Sin puntuar" : {
+
+    },
+    "Sinopsis" : {
+
+    },
+    "Toca para deseleccionar" : {
+
+    },
+    "Toca para filtrar por este género" : {
+
+    },
+    "Todos" : {
+
+    },
+    "Tu lista de pendientes está vacía" : {
+
+    },
+    "Viendo" : {
+
+    },
+    "Viendo actualmente" : {
+
+    },
+    "Volumen" : {
+
+    }
+  },
+  "version" : "1.0"
+}

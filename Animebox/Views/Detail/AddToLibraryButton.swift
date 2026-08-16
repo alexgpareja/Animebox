@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct AddToLibraryButton: View {
-    let title: String
+    let title: LocalizedStringKey
     let action: () -> Void
 
     var body: some View {

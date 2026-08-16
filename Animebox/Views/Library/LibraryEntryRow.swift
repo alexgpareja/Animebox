@@ -11,7 +11,7 @@ struct LibraryEntryRow: View {
     var body: some View {
         HStack(spacing: AppSpacing.itemSpacing) {
             LibraryEntryThumbnail(imageURL: entry.imageURL)
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: AppSpacing.microSpacing) {
                 Text(entry.title)
                     .font(.subheadline)
                     .foregroundStyle(AppColors.textPrimary)
@@ -21,7 +21,7 @@ struct LibraryEntryRow: View {
                     total: entry.totalEpisodes
                 )
                 if let score = entry.personalScore {
-                    HStack(spacing: 4) {
+                    HStack(spacing: AppSpacing.microSpacing) {
                         Image(systemName: "star.fill")
                             .font(.caption2)
                             .foregroundStyle(AppColors.accent)
@@ -33,7 +33,7 @@ struct LibraryEntryRow: View {
             }
             Spacer(minLength: 0)
         }
-        .padding(.vertical, 6)
+        .padding(.vertical, AppSpacing.compactSpacing)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(entry.title)
     }

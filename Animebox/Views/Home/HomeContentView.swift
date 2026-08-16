@@ -21,10 +21,10 @@ struct HomeContentView: View {
             }
         } else {
             ScrollView {
-                VStack(alignment: .leading, spacing: AppSpacing.padding * 1.5) {
+                VStack(alignment: .leading, spacing: AppSpacing.sectionSpacing) {
                     WatchingNowSection(entries: watching)
-                    HomeAnimeSection(title: "Top Anime", items: topAnime)
-                    HomeAnimeSection(title: "En Emisión", items: currentSeason)
+                    HomeMediaSection(title: "Top Anime", items: topAnime)
+                    HomeMediaSection(title: "En Emisión", items: currentSeason)
                 }
                 .padding(.vertical, AppSpacing.padding)
             }

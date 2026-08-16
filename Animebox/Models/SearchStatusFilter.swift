@@ -15,10 +15,10 @@ enum SearchStatusFilter: String, CaseIterable, Identifiable, Hashable, Sendable 
 
     var displayName: String {
         switch self {
-        case .all: "Todos"
-        case .airing: "Emitiendo"
-        case .complete: "Finalizado"
-        case .upcoming: "Próximamente"
+        case .all: String(localized: "Todos")
+        case .airing: String(localized: "Emitiendo")
+        case .complete: String(localized: "Finalizado")
+        case .upcoming: String(localized: "Próximamente")
         }
     }
 
