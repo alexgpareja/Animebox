@@ -64,7 +64,8 @@ final class AniListAuthService: NSObject, AniListAuthServicing, ASWebAuthenticat
                 }
             }
             session.presentationContextProvider = self
-            session.prefersEphemeralWebBrowserSession = true
+            // No efímera: AniList verifica "dispositivo nuevo" con una cookie del navegador donde se pulsa el enlace del correo (Safari); una sesión efímera nunca la ve y el login entra en bucle.
+            session.prefersEphemeralWebBrowserSession = false
             session.start()
         }
     }
