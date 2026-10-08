@@ -95,7 +95,8 @@ final class MALAuthService: NSObject, MALAuthServicing, ASWebAuthenticationPrese
                 }
             }
             session.presentationContextProvider = self
-            session.prefersEphemeralWebBrowserSession = true
+            // No efímera, igual que AniList: si MAL pide verificar el dispositivo por correo, la cookie queda en Safari y una sesión efímera nunca la vería (bucle de login).
+            session.prefersEphemeralWebBrowserSession = false
             session.start()
         }
     }
