@@ -11,8 +11,11 @@ struct LibraryView: View {
     @Binding var mediaKind: MediaKind
     @State private var selectedStatus: LibraryStatus = .watching
     @State private var selectedMangaStatus: MangaStatus = .reading
-    @Query(sort: \LibraryEntry.updatedAt, order: .reverse) private var entries: [LibraryEntry]
-    @Query(sort: \MangaLibraryEntry.updatedAt, order: .reverse) private var mangaEntries: [MangaLibraryEntry]
+    @Query(sort: \LibraryEntry.updatedAt, order: .reverse) private var allEntries: [LibraryEntry]
+    @Query(sort: \MangaLibraryEntry.updatedAt, order: .reverse) private var allMangaEntries: [MangaLibraryEntry]
+
+    private var entries: [LibraryEntry] { allEntries.filter { $0.provider == linkedAccount.libraryProvider } }
+    private var mangaEntries: [MangaLibraryEntry] { allMangaEntries.filter { $0.provider == linkedAccount.libraryProvider } }
     @Environment(\.modelContext) private var context
 
     @State private var presentingError = false
