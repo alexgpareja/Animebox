@@ -19,14 +19,14 @@ enum MangaTypeFilter: String, CaseIterable, Identifiable, Hashable, Sendable {
 
     var displayName: String {
         switch self {
-        case .all: String(localized: "Todos")
-        case .manga: String(localized: "Manga")
-        case .novel: String(localized: "Novela")
-        case .lightnovel: String(localized: "Novela ligera")
-        case .oneshot: String(localized: "One-shot")
-        case .doujin: String(localized: "Doujinshi")
-        case .manhwa: String(localized: "Manhwa")
-        case .manhua: String(localized: "Manhua")
+        case .all: AppLanguage.current.string("Todos")
+        case .manga: AppLanguage.current.string("Manga")
+        case .novel: AppLanguage.current.string("Novela")
+        case .lightnovel: AppLanguage.current.string("Novela ligera")
+        case .oneshot: AppLanguage.current.string("One-shot")
+        case .doujin: AppLanguage.current.string("Doujinshi")
+        case .manhwa: AppLanguage.current.string("Manhwa")
+        case .manhua: AppLanguage.current.string("Manhua")
         }
     }
 

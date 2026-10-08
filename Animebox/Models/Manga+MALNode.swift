@@ -33,7 +33,9 @@ extension Manga {
             popularity: node.popularity,
             members: node.numListUsers,
             favorites: nil,
-            genres: node.genres?.map { NamedEntity(malId: $0.id, type: "manga", name: $0.name, url: nil) }
+            genres: node.genres?.map { NamedEntity(malId: $0.id, type: "manga", name: $0.name, url: nil) },
+            published: DateRange(from: node.startDate, to: node.endDate),
+            relations: node.relatedManga?.map { $0.asRelationGroup(entryType: "manga") }
         )
     }
 }

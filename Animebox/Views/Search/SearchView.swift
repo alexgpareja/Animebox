@@ -7,7 +7,7 @@ import SwiftUI
 import SwiftData
 
 struct SearchView: View {
-    @Environment(MALSession.self) private var malSession
+    @Environment(LinkedAccount.self) private var linkedAccount
     @Binding var mediaKind: MediaKind
     @State private var viewModel: SearchViewModel
     @State private var mangaViewModel: MangaSearchViewModel
@@ -102,10 +102,10 @@ struct SearchView: View {
             mangaViewModel.search()
         }
         .navigationDestination(for: Anime.self) { anime in
-            AnimeDetailView(anime: anime, service: ContentRouter(session: malSession))
+            AnimeDetailView(anime: anime, service: ContentRouter(account: linkedAccount))
         }
         .navigationDestination(for: Manga.self) { manga in
-            MangaDetailView(manga: manga, service: ContentRouter(session: malSession))
+            MangaDetailView(manga: manga, service: ContentRouter(account: linkedAccount))
         }
     }
 }
@@ -120,7 +120,7 @@ struct SearchView: View {
         )
     }
     .modelContainer(for: [LibraryEntry.self, MangaLibraryEntry.self], inMemory: true)
-    .environment(MALSession())
+    .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
     .preferredColorScheme(.dark)
 }
 #endif

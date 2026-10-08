@@ -54,9 +54,9 @@ struct WatchingNowEntryView: View {
 
     private func episodeLabel(for item: WatchingNowItem) -> String {
         if let total = item.totalEpisodes {
-            String(localized: "Ep. \(item.progress)/\(total)")
+            String(format: AppLanguage.current.string("Ep. %lld/%lld"), item.progress, total)
         } else {
-            String(localized: "Ep. \(item.progress)")
+            String(format: AppLanguage.current.string("Ep. %lld"), item.progress)
         }
     }
 

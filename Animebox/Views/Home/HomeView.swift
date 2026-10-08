@@ -7,10 +7,12 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    @Environment(MALSession.self) private var malSession
+    @Environment(LinkedAccount.self) private var linkedAccount
     @Binding var mediaKind: MediaKind
     @State private var viewModel: HomeViewModel
     @State private var mangaViewModel: MangaHomeViewModel
+    @State private var sectionOrderSettings = HomeSectionOrderSettings()
+    @State private var isPresentingOrderSheet = false
     @Query private var watchingEntries: [LibraryEntry]
     @Query private var readingEntries: [MangaLibraryEntry]
 
@@ -46,7 +48,8 @@ struct HomeView: View {
                     topAnime: viewModel.topAnime,
                     currentSeason: viewModel.currentSeason,
                     errorMessage: animeErrorMessage,
-                    retry: reloadAnime
+                    retry: reloadAnime,
+                    sectionOrder: sectionOrderSettings.animeOrder
                 )
             case .manga:
                 MangaHomeContentView(
@@ -54,13 +57,26 @@ struct HomeView: View {
                     topManga: mangaViewModel.topManga,
                     currentlyPublishing: mangaViewModel.currentlyPublishing,
                     errorMessage: mangaErrorMessage,
-                    retry: reloadManga
+                    retry: reloadManga,
+                    sectionOrder: sectionOrderSettings.mangaOrder
                 )
             }
         }
         .animation(.easeInOut(duration: 0.2), value: mediaKind)
         .background(AppColors.background.ignoresSafeArea())
         .navigationTitle("Inicio")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isPresentingOrderSheet = true
+                } label: {
+                    Label("Ordenar Inicio", systemImage: "arrow.up.arrow.down.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $isPresentingOrderSheet) {
+            HomeSectionOrderSheet(mediaKind: mediaKind, settings: sectionOrderSettings)
+        }
         .task(id: mediaKind) {
             switch mediaKind {
             case .anime:
@@ -76,10 +92,10 @@ struct HomeView: View {
             }
         }
         .navigationDestination(for: Anime.self) { anime in
-            AnimeDetailView(anime: anime, service: ContentRouter(session: malSession))
+            AnimeDetailView(anime: anime, service: ContentRouter(account: linkedAccount))
         }
         .navigationDestination(for: Manga.self) { manga in
-            MangaDetailView(manga: manga, service: ContentRouter(session: malSession))
+            MangaDetailView(manga: manga, service: ContentRouter(account: linkedAccount))
         }
     }
 
@@ -118,7 +134,7 @@ struct HomeView: View {
         )
     }
     .modelContainer(PreviewLibrary.makeContainer())
-    .environment(MALSession())
+    .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
     .preferredColorScheme(.dark)
 }
 #endif

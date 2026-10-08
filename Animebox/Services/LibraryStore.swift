@@ -11,9 +11,13 @@ import WidgetKit
 struct LibraryStore {
     let context: ModelContext
 
-    func entry(for animeId: Int) -> LibraryEntry? {
+    /// `malId` ya no es único en solitario — MAL/Tenrai y AniList tienen
+    /// espacios de ID distintos, así que la identidad real de una entrada es
+    /// el par `(malId, provider)`.
+    func entry(for animeId: Int, provider: LibraryProvider) -> LibraryEntry? {
+        let providerRaw = provider.rawValue
         var descriptor = FetchDescriptor<LibraryEntry>(
-            predicate: #Predicate { $0.malId == animeId }
+            predicate: #Predicate { $0.malId == animeId && $0.providerRaw == providerRaw }
         )
         descriptor.fetchLimit = 1
         return try? context.fetch(descriptor).first
@@ -21,6 +25,7 @@ struct LibraryStore {
 
     func upsert(
         anime: Anime,
+        provider: LibraryProvider,
         status: LibraryStatus,
         progress: Int,
         personalScore: Int?,
@@ -28,7 +33,7 @@ struct LibraryStore {
         startDate: Date? = .now,
         finishDate: Date? = nil
     ) throws {
-        if let existing = entry(for: anime.malId) {
+        if let existing = entry(for: anime.malId, provider: provider) {
             existing.title = anime.displayTitle
             existing.imageURL = anime.images.bestURL?.absoluteString
             existing.status = status
@@ -36,6 +41,8 @@ struct LibraryStore {
             existing.totalEpisodes = anime.episodes
             existing.personalScore = personalScore
             existing.animeScore = anime.score
+            existing.members = anime.members
+            existing.genreNames = anime.genres?.map(\.name)
             existing.notes = notes
             existing.startDate = startDate
             existing.finishDate = finishDate
@@ -43,6 +50,7 @@ struct LibraryStore {
         } else {
             let entry = LibraryEntry(
                 malId: anime.malId,
+                provider: provider,
                 title: anime.displayTitle,
                 imageURL: anime.images.bestURL?.absoluteString,
                 status: status,
@@ -50,6 +58,8 @@ struct LibraryStore {
                 totalEpisodes: anime.episodes,
                 personalScore: personalScore,
                 animeScore: anime.score,
+                members: anime.members,
+                genreNames: anime.genres?.map(\.name),
                 notes: notes,
                 startDate: startDate,
                 finishDate: finishDate,
@@ -60,8 +70,8 @@ struct LibraryStore {
         try save()
     }
 
-    func delete(animeId: Int) throws {
-        guard let existing = entry(for: animeId) else { return }
+    func delete(animeId: Int, provider: LibraryProvider) throws {
+        guard let existing = entry(for: animeId, provider: provider) else { return }
         context.delete(existing)
         try save()
     }

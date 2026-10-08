@@ -39,7 +39,9 @@ extension Anime {
             year: node.startSeason?.year,
             season: node.startSeason?.season,
             genres: node.genres?.map { NamedEntity(malId: $0.id, type: "anime", name: $0.name, url: nil) },
-            studios: node.studios?.map { NamedEntity(malId: $0.id, type: "anime", name: $0.name, url: nil) }
+            studios: node.studios?.map { NamedEntity(malId: $0.id, type: "anime", name: $0.name, url: nil) },
+            aired: DateRange(from: node.startDate, to: node.endDate),
+            relations: node.relatedAnime?.map { $0.asRelationGroup(entryType: "anime") }
         )
     }
 }

@@ -15,10 +15,10 @@ enum MangaSearchStatusFilter: String, CaseIterable, Identifiable, Hashable, Send
 
     var displayName: String {
         switch self {
-        case .all: String(localized: "Todos")
-        case .publishing: String(localized: "Publicándose")
-        case .complete: String(localized: "Finalizado")
-        case .upcoming: String(localized: "Próximamente")
+        case .all: AppLanguage.current.string("Todos")
+        case .publishing: AppLanguage.current.string("Publicándose")
+        case .complete: AppLanguage.current.string("Finalizado")
+        case .upcoming: AppLanguage.current.string("Próximamente")
         }
     }
 

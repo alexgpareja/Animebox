@@ -19,5 +19,7 @@
 	</array>
 	<key>MALClientID</key>
 	<string>$(MAL_CLIENT_ID)</string>
+	<key>AniListClientID</key>
+	<string>$(ANILIST_CLIENT_ID)</string>
 </dict>
 </plist>

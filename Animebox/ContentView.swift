@@ -11,7 +11,7 @@ enum AppTab: Hashable {
 }
 
 struct ContentView: View {
-    @Environment(MALSession.self) private var malSession
+    @Environment(LinkedAccount.self) private var linkedAccount
     @State private var selection: AppTab = .home
     @State private var mediaKind: MediaKind = .anime
 
@@ -21,8 +21,8 @@ struct ContentView: View {
                 NavigationStack {
                     HomeView(
                         mediaKind: $mediaKind,
-                        viewModel: HomeViewModel(service: ContentRouter(session: malSession)),
-                        mangaViewModel: MangaHomeViewModel(service: ContentRouter(session: malSession))
+                        viewModel: HomeViewModel(service: ContentRouter(account: linkedAccount)),
+                        mangaViewModel: MangaHomeViewModel(service: ContentRouter(account: linkedAccount))
                     )
                 }
             }
@@ -30,8 +30,8 @@ struct ContentView: View {
                 NavigationStack {
                     SearchView(
                         mediaKind: $mediaKind,
-                        viewModel: SearchViewModel(service: ContentRouter(session: malSession)),
-                        mangaViewModel: MangaSearchViewModel(service: ContentRouter(session: malSession))
+                        viewModel: SearchViewModel(service: ContentRouter(account: linkedAccount)),
+                        mangaViewModel: MangaSearchViewModel(service: ContentRouter(account: linkedAccount))
                     )
                 }
             }
@@ -48,6 +48,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .modelContainer(for: [LibraryEntry.self, MangaLibraryEntry.self], inMemory: true)
-        .environment(MALSession())
+        .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
         .preferredColorScheme(.dark)
 }

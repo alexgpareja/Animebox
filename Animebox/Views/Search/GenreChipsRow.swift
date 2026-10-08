@@ -33,7 +33,7 @@ struct GenreChipsRow: View {
             FlowLayout(spacing: AppSpacing.compactSpacing) {
                 ForEach(visibleGenres) { genre in
                     GenreChip(
-                        title: genre.name,
+                        title: genre.localizedDisplayName,
                         isSelected: selectedIDs.contains(genre.malId)
                     ) {
                         onTap(genre.malId)

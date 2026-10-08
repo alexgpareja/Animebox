@@ -25,7 +25,12 @@ enum AppSpacing {
 }
 
 nonisolated enum APIConfig {
-    static let jikanBaseURL = URL(string: "https://api.jikan.moe/v4")!
+    /// Jikan (`api.jikan.moe`) se descontinúa el 2026-10-01 (y llevaba caído
+    /// gran parte de esta sesión de desarrollo antes de eso). Tenrai es el
+    /// sucesor comunitario, mismo shape de JSON v4 — `JikanService` sigue
+    /// llamándose así porque su lógica de construcción de URL/decodificación
+    /// no cambió, solo el host al que apunta.
+    static let tenraiBaseURL = URL(string: "https://api.tenrai.org/v1")!
     static let requestTimeout: TimeInterval = 30
     static let searchDebounceMilliseconds: UInt64 = 300
 }

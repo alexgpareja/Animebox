@@ -1,274 +1,2732 @@
 {
-  "sourceLanguage" : "es",
-  "strings" : {
-    "—" : {
-
-    },
-    "%lld" : {
-
-    },
-    "%lld / %lld" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld / %2$lld"
+  "sourceLanguage": "es",
+  "strings": {
+    "%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
           }
         }
       }
     },
-    "%lld / 10" : {
-
-    },
-    "%lld cap." : {
-
-    },
-    "%lld ep." : {
-
-    },
-    "+1" : {
-
-    },
-    "Abandonado" : {
-
-    },
-    "Algo salió mal" : {
-
-    },
-    "Añade desde el detalle de cualquier anime." : {
-
-    },
-    "Añade desde el detalle de cualquier manga." : {
-
-    },
-    "Añadir a Mi Biblioteca" : {
-
-    },
-    "Anime" : {
-
-    },
-    "Anime o manga" : {
-
-    },
-    "Aquí aparecerán los animes que dejes a medias." : {
-
-    },
-    "Aquí aparecerán los mangas que dejes a medias." : {
-
-    },
-    "Aún no estás leyendo nada" : {
-
-    },
-    "Aún no estás viendo nada" : {
-
-    },
-    "Aún no has completado ningún anime" : {
-
-    },
-    "Aún no has completado ningún manga" : {
-
-    },
-    "Biblioteca" : {
-
-    },
-    "Borrar búsqueda" : {
-
-    },
-    "Busca tu próximo anime" : {
-
-    },
-    "Busca tu próximo manga" : {
-
-    },
-    "Buscar" : {
-
-    },
-    "Buscar anime…" : {
-
-    },
-    "Buscar manga…" : {
-
-    },
-    "Cancelar" : {
-
-    },
-    "Capítulo" : {
-
-    },
-    "Capítulos" : {
-
-    },
-    "Cargando" : {
-
-    },
-    "Completado" : {
-
-    },
-    "Cuando termines un anime, márcalo como completado." : {
-
-    },
-    "Cuando termines un manga, márcalo como completado." : {
-
-    },
-    "Editar en Mi Biblioteca" : {
-
-    },
-    "Emitiendo" : {
-
-    },
-    "Empieza a escribir para buscar en MyAnimeList." : {
-
-    },
-    "Empieza por elegir un género" : {
-
-    },
-    "Episodio" : {
-
-    },
-    "Episodios" : {
-
-    },
-    "Error del servidor (%lld)." : {
-
-    },
-    "Estado" : {
-
-    },
-    "Fecha de finalización" : {
-
-    },
-    "Fecha de inicio" : {
-
-    },
-    "Fechas" : {
-
-    },
-    "Filtrar" : {
-
-    },
-    "Finalizado" : {
-
-    },
-    "Géneros" : {
-
-    },
-    "Guarda animes que quieras ver más adelante." : {
-
-    },
-    "Guarda mangas que quieras leer más adelante." : {
-
-    },
-    "Guardar" : {
-
-    },
-    "Has alcanzado el límite de peticiones. Inténtalo de nuevo en unos segundos." : {
-
-    },
-    "Inicio" : {
-
-    },
-    "La URL solicitada no es válida." : {
-
-    },
-    "Leyendo" : {
-
-    },
-    "Leyendo actualmente" : {
-
-    },
-    "Manga" : {
-
-    },
-    "Mi entrada" : {
-
-    },
-    "No has abandonado ningún anime" : {
-
-    },
-    "No has abandonado ningún manga" : {
-
-    },
-    "No pudimos procesar la respuesta del servidor." : {
-
-    },
-    "No se pudo guardar" : {
-
-    },
-    "No se pudo guardar el cambio" : {
-
-    },
-    "Notas" : {
-
-    },
-    "Notas (opcional)" : {
-
-    },
-    "O escribe en la barra de búsqueda para encontrar un anime concreto." : {
-
-    },
-    "O escribe en la barra de búsqueda para encontrar un manga concreto." : {
-
-    },
-    "OK" : {
-
-    },
-    "Petición cancelada." : {
-
-    },
-    "Planeado" : {
-
-    },
-    "Progreso" : {
-
-    },
-    "Próximamente" : {
-
-    },
-    "Publicándose" : {
-
-    },
-    "Puntuación" : {
-
-    },
-    "Puntuación personal" : {
-
-    },
-    "Reintentar" : {
-
-    },
-    "Respuesta inesperada del servidor." : {
-
-    },
-    "Score" : {
-
-    },
-    "Sin puntuar" : {
-
-    },
-    "Sinopsis" : {
-
-    },
-    "Toca para deseleccionar" : {
-
-    },
-    "Toca para filtrar por este género" : {
-
-    },
-    "Todos" : {
-
-    },
-    "Tu lista de pendientes está vacía" : {
-
-    },
-    "Viendo" : {
-
-    },
-    "Viendo actualmente" : {
-
-    },
-    "Volumen" : {
-
+    "%lld / %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld / 10": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / 10"
+          }
+        }
+      }
+    },
+    "%lld cap.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ch."
+          }
+        }
+      }
+    },
+    "%lld ep.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ep."
+          }
+        }
+      }
+    },
+    "%lld h": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h"
+          }
+        }
+      }
+    },
+    "%lld series importadas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld titles imported"
+          }
+        }
+      }
+    },
+    "+1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+1"
+          }
+        }
+      }
+    },
+    "Abandonado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dropped"
+          }
+        }
+      }
+    },
+    "Acción": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Action"
+          }
+        }
+      }
+    },
+    "Ajustes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "Alfabético (A-Z)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alphabetical (A-Z)"
+          }
+        }
+      }
+    },
+    "Alfabético (Z-A)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alphabetical (Z-A)"
+          }
+        }
+      }
+    },
+    "Algo salió mal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something went wrong"
+          }
+        }
+      }
+    },
+    "Ambientación alternativa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alternative Setting"
+          }
+        }
+      }
+    },
+    "Ambiente Laboral": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workplace"
+          }
+        }
+      }
+    },
+    "Anime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anime"
+          }
+        }
+      }
+    },
+    "Anime en biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anime in library"
+          }
+        }
+      }
+    },
+    "Anime o manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anime or manga"
+          }
+        }
+      }
+    },
+    "Anime por estado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anime by status"
+          }
+        }
+      }
+    },
+    "Antropomórfico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropomorphic"
+          }
+        }
+      }
+    },
+    "Aplicar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply"
+          }
+        }
+      }
+    },
+    "Aquí aparecerán los animes que dejes a medias.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The anime you leave on hold will appear here."
+          }
+        }
+      }
+    },
+    "Aquí aparecerán los animes que pongas en pausa.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The anime you put on hold will appear here."
+          }
+        }
+      }
+    },
+    "Aquí aparecerán los mangas que dejes a medias.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The manga you leave on hold will appear here."
+          }
+        }
+      }
+    },
+    "Aquí aparecerán los mangas que pongas en pausa.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The manga you put on hold will appear here."
+          }
+        }
+      }
+    },
+    "Artes Escénicas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Performing Arts"
+          }
+        }
+      }
+    },
+    "Artes Marciales": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Martial Arts"
+          }
+        }
+      }
+    },
+    "Artes Visuales": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visual Arts"
+          }
+        }
+      }
+    },
+    "Aventura": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adventure"
+          }
+        }
+      }
+    },
+    "Añade desde el detalle de cualquier anime.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add it from any anime's detail screen."
+          }
+        }
+      }
+    },
+    "Añade desde el detalle de cualquier manga.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add it from any manga's detail screen."
+          }
+        }
+      }
+    },
+    "Añadir a Mi Biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to My Library"
+          }
+        }
+      }
+    },
+    "Año": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Year"
+          }
+        }
+      }
+    },
+    "Aún no emitido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not yet aired"
+          }
+        }
+      }
+    },
+    "Aún no estás leyendo nada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're not reading anything yet"
+          }
+        }
+      }
+    },
+    "Aún no estás viendo nada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're not watching anything yet"
+          }
+        }
+      }
+    },
+    "Aún no has completado ningún anime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You haven't completed any anime yet"
+          }
+        }
+      }
+    },
+    "Aún no has completado ningún manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You haven't completed any manga yet"
+          }
+        }
+      }
+    },
+    "Aún no publicado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not yet published"
+          }
+        }
+      }
+    },
+    "Biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Library"
+          }
+        }
+      }
+    },
+    "Borrar búsqueda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear search"
+          }
+        }
+      }
+    },
+    "Boys Love": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boys Love"
+          }
+        }
+      }
+    },
+    "Busca tu próximo anime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find your next anime"
+          }
+        }
+      }
+    },
+    "Busca tu próximo manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find your next manga"
+          }
+        }
+      }
+    },
+    "Buscar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        }
+      }
+    },
+    "Buscar anime…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search anime…"
+          }
+        }
+      }
+    },
+    "Buscar en tu biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search your library"
+          }
+        }
+      }
+    },
+    "Buscar manga…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search manga…"
+          }
+        }
+      }
+    },
+    "CGDCT": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CGDCT"
+          }
+        }
+      }
+    },
+    "Cambio de Sexo Mágico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Magical Sex Shift"
+          }
+        }
+      }
+    },
+    "Cancelado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled"
+          }
+        }
+      }
+    },
+    "Cancelar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Capítulo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter"
+          }
+        }
+      }
+    },
+    "Capítulos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapters"
+          }
+        }
+      }
+    },
+    "Capítulos leídos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapters read"
+          }
+        }
+      }
+    },
+    "Cargando": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading"
+          }
+        }
+      }
+    },
+    "Carreras": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Racing"
+          }
+        }
+      }
+    },
+    "Cerrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "Cerrar sesión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign out"
+          }
+        }
+      }
+    },
+    "Chica Mágica": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahou Shoujo"
+          }
+        }
+      }
+    },
+    "Ciencia Ficción": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sci-Fi"
+          }
+        }
+      }
+    },
+    "Comedia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comedy"
+          }
+        }
+      }
+    },
+    "Completado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed"
+          }
+        }
+      }
+    },
+    "Conectado a %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in to %@"
+          }
+        }
+      }
+    },
+    "Conectado a %@ como %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in to %@ as %@"
+          }
+        }
+      }
+    },
+    "Crimen Organizado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Organized Crime"
+          }
+        }
+      }
+    },
+    "Cualquiera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any"
+          }
+        }
+      }
+    },
+    "Cuando termines un anime, márcalo como completado.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you finish an anime, mark it as completed."
+          }
+        }
+      }
+    },
+    "Cuando termines un manga, márcalo como completado.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you finish a manga, mark it as completed."
+          }
+        }
+      }
+    },
+    "Cuenta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Account"
+          }
+        }
+      }
+    },
+    "Cuidado Infantil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Childcare"
+          }
+        }
+      }
+    },
+    "Cultura Otaku": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otaku Culture"
+          }
+        }
+      }
+    },
+    "Datos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "Delincuentes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delinquents"
+          }
+        }
+      }
+    },
+    "Deportes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sports"
+          }
+        }
+      }
+    },
+    "Deportes de Combate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combat Sports"
+          }
+        }
+      }
+    },
+    "Deportes de Equipo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Team Sports"
+          }
+        }
+      }
+    },
+    "Descontinuado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discontinued"
+          }
+        }
+      }
+    },
+    "Desde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From"
+          }
+        }
+      }
+    },
+    "Detalles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Details"
+          }
+        }
+      }
+    },
+    "Detectives": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detective"
+          }
+        }
+      }
+    },
+    "Doujinshi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doujinshi"
+          }
+        }
+      }
+    },
+    "Drama": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drama"
+          }
+        }
+      }
+    },
+    "Editar en Mi Biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit in My Library"
+          }
+        }
+      }
+    },
+    "Educativo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Educational"
+          }
+        }
+      }
+    },
+    "El anime que estás viendo y en qué episodio vas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The anime you're watching and which episode you're on."
+          }
+        }
+      }
+    },
+    "El fichero no contiene ninguna entrada de anime o manga.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file doesn't contain any anime or manga entries."
+          }
+        }
+      }
+    },
+    "El fichero no parece ser una exportación válida de MyAnimeList.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file doesn't look like a valid MyAnimeList export."
+          }
+        }
+      }
+    },
+    "Elegir fichero XML": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose XML file"
+          }
+        }
+      }
+    },
+    "Emisión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aired"
+          }
+        }
+      }
+    },
+    "Emitiendo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Airing"
+          }
+        }
+      }
+    },
+    "Emitiéndose": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Airing"
+          }
+        }
+      }
+    },
+    "Empieza a escribir para buscar en MyAnimeList.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start typing to search MyAnimeList."
+          }
+        }
+      }
+    },
+    "Empieza por elegir un género": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start by choosing a genre"
+          }
+        }
+      }
+    },
+    "En Emisión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Airing Now"
+          }
+        }
+      }
+    },
+    "En Publicación": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publishing Now"
+          }
+        }
+      }
+    },
+    "En pausa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On hold"
+          }
+        }
+      }
+    },
+    "Ep. %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ep. %lld"
+          }
+        }
+      }
+    },
+    "Ep. %lld/%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ep. %lld/%lld"
+          }
+        }
+      }
+    },
+    "Episodio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Episode"
+          }
+        }
+      }
+    },
+    "Episodios": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Episodes"
+          }
+        }
+      }
+    },
+    "Episodios vistos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Episodes watched"
+          }
+        }
+      }
+    },
+    "Error del servidor (%lld).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server error (%lld)."
+          }
+        }
+      }
+    },
+    "Escolar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "School"
+          }
+        }
+      }
+    },
+    "Espacio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space"
+          }
+        }
+      }
+    },
+    "Especial": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Special"
+          }
+        }
+      }
+    },
+    "Estado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        }
+      }
+    },
+    "Estadísticas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistics"
+          }
+        }
+      }
+    },
+    "Exporta tu lista de anime o manga desde la web de MyAnimeList (Ajustes → Import/Export) y elige aquí el fichero .xml. Puedes repetir el proceso una vez por cada lista.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export your anime or manga list from the MyAnimeList website (Settings → Import/Export) and pick the .xml file here. You can repeat this once per list."
+          }
+        }
+      }
+    },
+    "Fantasía": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fantasy"
+          }
+        }
+      }
+    },
+    "Fantasía Urbana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urban Fantasy"
+          }
+        }
+      }
+    },
+    "Fecha de finalización": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish date"
+          }
+        }
+      }
+    },
+    "Fecha de inicio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start date"
+          }
+        }
+      }
+    },
+    "Fechas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dates"
+          }
+        }
+      }
+    },
+    "Filtrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter"
+          }
+        }
+      }
+    },
+    "Finalizado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finished"
+          }
+        }
+      }
+    },
+    "G - Todos los públicos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "G - All Ages"
+          }
+        }
+      }
+    },
+    "Girls Love": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girls Love"
+          }
+        }
+      }
+    },
+    "Gore": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gore"
+          }
+        }
+      }
+    },
+    "Gourmet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gourmet"
+          }
+        }
+      }
+    },
+    "Guarda animes que quieras ver más adelante.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save anime you want to watch later."
+          }
+        }
+      }
+    },
+    "Guarda mangas que quieras leer más adelante.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save manga you want to read later."
+          }
+        }
+      }
+    },
+    "Guardar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "Géneros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genres"
+          }
+        }
+      }
+    },
+    "Géneros de anime más vistos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most-watched anime genres"
+          }
+        }
+      }
+    },
+    "Géneros de manga más leídos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most-read manga genres"
+          }
+        }
+      }
+    },
+    "Harem": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harem"
+          }
+        }
+      }
+    },
+    "Harem Inverso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reverse Harem"
+          }
+        }
+      }
+    },
+    "Has alcanzado el límite de peticiones. Inténtalo de nuevo en unos segundos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've hit the rate limit. Try again in a few seconds."
+          }
+        }
+      }
+    },
+    "Hasta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To"
+          }
+        }
+      }
+    },
+    "Historia completa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Story"
+          }
+        }
+      }
+    },
+    "Historia paralela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Side Story"
+          }
+        }
+      }
+    },
+    "Historia principal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parent Story"
+          }
+        }
+      }
+    },
+    "Histórico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historical"
+          }
+        }
+      }
+    },
+    "Humor Gag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gag Humor"
+          }
+        }
+      }
+    },
+    "Idioma": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
+          }
+        }
+      }
+    },
+    "Idols (Femenino)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idols (Female)"
+          }
+        }
+      }
+    },
+    "Idols (Masculino)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idols (Male)"
+          }
+        }
+      }
+    },
+    "Importa tu lista de MyAnimeList": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import your MyAnimeList list"
+          }
+        }
+      }
+    },
+    "Importando %lld de %lld…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importing %lld of %lld…"
+          }
+        }
+      }
+    },
+    "Importar de MyAnimeList": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import from MyAnimeList"
+          }
+        }
+      }
+    },
+    "Importar lista de MyAnimeList (XML)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import MyAnimeList list (XML)"
+          }
+        }
+      }
+    },
+    "Inicia sesión con tu cuenta de MyAnimeList para que Buscar e Inicio usen la API oficial (no depende de que Jikan esté caído) y tu lista se sincronice con tu cuenta real.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in with your MyAnimeList account so Search and Home use the official API (doesn't depend on Jikan being down) and your list syncs with your real account."
+          }
+        }
+      }
+    },
+    "Iniciando sesión…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signing in…"
+          }
+        }
+      }
+    },
+    "Iniciar sesión con MyAnimeList": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in with MyAnimeList"
+          }
+        }
+      }
+    },
+    "Inicio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home"
+          }
+        }
+      }
+    },
+    "Inicio de sesión cancelado.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign-in cancelled."
+          }
+        }
+      }
+    },
+    "Isekai": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isekai"
+          }
+        }
+      }
+    },
+    "Iyashikei": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iyashikei"
+          }
+        }
+      }
+    },
+    "Juego de Estrategia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strategy Game"
+          }
+        }
+      }
+    },
+    "Juegos de Alto Riesgo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High Stakes Game"
+          }
+        }
+      }
+    },
+    "La URL solicitada no es válida.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The requested URL isn't valid."
+          }
+        }
+      }
+    },
+    "La respuesta de MyAnimeList no coincide con la petición original.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MyAnimeList's response doesn't match the original request."
+          }
+        }
+      }
+    },
+    "Leyendo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading"
+          }
+        }
+      }
+    },
+    "Leyendo actualmente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currently reading"
+          }
+        }
+      }
+    },
+    "Manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manga"
+          }
+        }
+      }
+    },
+    "Manga en biblioteca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manga in library"
+          }
+        }
+      }
+    },
+    "Manga por estado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manga by status"
+          }
+        }
+      }
+    },
+    "Manhua": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manhua"
+          }
+        }
+      }
+    },
+    "Manhwa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manhwa"
+          }
+        }
+      }
+    },
+    "Mascotas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pets"
+          }
+        }
+      }
+    },
+    "Mayor valoración": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Highest rated"
+          }
+        }
+      }
+    },
+    "Mecha": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mecha"
+          }
+        }
+      }
+    },
+    "Memorias": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memoir"
+          }
+        }
+      }
+    },
+    "Menor valoración": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lowest rated"
+          }
+        }
+      }
+    },
+    "Menos espectadores": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fewest viewers"
+          }
+        }
+      }
+    },
+    "Mi entrada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My entry"
+          }
+        }
+      }
+    },
+    "Militar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Military"
+          }
+        }
+      }
+    },
+    "Misterio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mystery"
+          }
+        }
+      }
+    },
+    "Mitología": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mythology"
+          }
+        }
+      }
+    },
+    "Mundo del Espectáculo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Showbiz"
+          }
+        }
+      }
+    },
+    "MyAnimeList no devolvió un código de autorización válido.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MyAnimeList didn't return a valid authorization code."
+          }
+        }
+      }
+    },
+    "Más antiguos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oldest first"
+          }
+        }
+      }
+    },
+    "Más espectadores": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most viewers"
+          }
+        }
+      }
+    },
+    "Más recientes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most recent"
+          }
+        }
+      }
+    },
+    "Médico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medical"
+          }
+        }
+      }
+    },
+    "Música": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Music"
+          }
+        }
+      }
+    },
+    "Nada en curso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing in progress"
+          }
+        }
+      }
+    },
+    "No has abandonado ningún anime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You haven't dropped any anime"
+          }
+        }
+      }
+    },
+    "No has abandonado ningún manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You haven't dropped any manga"
+          }
+        }
+      }
+    },
+    "No has iniciado sesión con MyAnimeList.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're not signed in to MyAnimeList."
+          }
+        }
+      }
+    },
+    "No pudimos procesar la respuesta del servidor.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn't process the server's response."
+          }
+        }
+      }
+    },
+    "No se pudo completar el inicio de sesión con MyAnimeList.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't complete sign-in with MyAnimeList."
+          }
+        }
+      }
+    },
+    "No se pudo guardar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save"
+          }
+        }
+      }
+    },
+    "No se pudo guardar el cambio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save the change"
+          }
+        }
+      }
+    },
+    "No se pudo traducir la sinopsis.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't translate the synopsis."
+          }
+        }
+      }
+    },
+    "No tienes animes en pausa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have no anime on hold"
+          }
+        }
+      }
+    },
+    "No tienes mangas en pausa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have no manga on hold"
+          }
+        }
+      }
+    },
+    "Notas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes"
+          }
+        }
+      }
+    },
+    "Notas (opcional)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes (optional)"
+          }
+        }
+      }
+    },
+    "Novela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novel"
+          }
+        }
+      }
+    },
+    "Novela ligera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light novel"
+          }
+        }
+      }
+    },
+    "O escribe en la barra de búsqueda para encontrar un anime concreto.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or type in the search bar to find a specific anime."
+          }
+        }
+      }
+    },
+    "O escribe en la barra de búsqueda para encontrar un manga concreto.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or type in the search bar to find a specific manga."
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "ONA": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ONA"
+          }
+        }
+      }
+    },
+    "OVA": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OVA"
+          }
+        }
+      }
+    },
+    "One-shot": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-shot"
+          }
+        }
+      }
+    },
+    "Ordenar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort"
+          }
+        }
+      }
+    },
+    "Ordenar Inicio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reorder Home"
+          }
+        }
+      }
+    },
+    "Otro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other"
+          }
+        }
+      }
+    },
+    "PG - Infantil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PG - Children"
+          }
+        }
+      }
+    },
+    "PG-13": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PG-13"
+          }
+        }
+      }
+    },
+    "Parodia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parody"
+          }
+        }
+      }
+    },
+    "Película": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movie"
+          }
+        }
+      }
+    },
+    "Personaje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Character"
+          }
+        }
+      }
+    },
+    "Petición cancelada.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Request cancelled."
+          }
+        }
+      }
+    },
+    "Planeado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planned"
+          }
+        }
+      }
+    },
+    "Polígono Amoroso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Love Polygon"
+          }
+        }
+      }
+    },
+    "Precuela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prequel"
+          }
+        }
+      }
+    },
+    "Premiada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Award Winning"
+          }
+        }
+      }
+    },
+    "Progreso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progress"
+          }
+        }
+      }
+    },
+    "Próximamente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upcoming"
+          }
+        }
+      }
+    },
+    "Psicológico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Psychological"
+          }
+        }
+      }
+    },
+    "Publicación": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Published"
+          }
+        }
+      }
+    },
+    "Publicándose": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publishing"
+          }
+        }
+      }
+    },
+    "Puntuación": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score"
+          }
+        }
+      }
+    },
+    "Puntuación personal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personal score"
+          }
+        }
+      }
+    },
+    "R+": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "R+"
+          }
+        }
+      }
+    },
+    "R-17+": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "R-17+"
+          }
+        }
+      }
+    },
+    "Rating": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rating"
+          }
+        }
+      }
+    },
+    "Recuentos de la Vida": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slice of Life"
+          }
+        }
+      }
+    },
+    "Reencarnación": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reincarnation"
+          }
+        }
+      }
+    },
+    "Reintentar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retry"
+          }
+        }
+      }
+    },
+    "Relacionados": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Related"
+          }
+        }
+      }
+    },
+    "Reparto Adulto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adult Cast"
+          }
+        }
+      }
+    },
+    "Respuesta inesperada del servidor.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unexpected response from the server."
+          }
+        }
+      }
+    },
+    "Restablecer filtros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset filters"
+          }
+        }
+      }
+    },
+    "Resumen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary"
+          }
+        }
+      }
+    },
+    "Romance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Romance"
+          }
+        }
+      }
+    },
+    "Samurái": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samurai"
+          }
+        }
+      }
+    },
+    "Score": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score"
+          }
+        }
+      }
+    },
+    "Se encontraron %lld animes en el fichero.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found %lld anime in the file."
+          }
+        }
+      }
+    },
+    "Se encontraron %lld mangas en el fichero.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found %lld manga in the file."
+          }
+        }
+      }
+    },
+    "Secuela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sequel"
+          }
+        }
+      }
+    },
+    "Sin puntuar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not scored"
+          }
+        }
+      }
+    },
+    "Sinopsis": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synopsis"
+          }
+        }
+      }
+    },
+    "Sobrenatural": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supernatural"
+          }
+        }
+      }
+    },
+    "Spin-off": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spin-Off"
+          }
+        }
+      }
+    },
+    "Statu Quo Amoroso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Love Status Quo"
+          }
+        }
+      }
+    },
+    "Superpoderes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super Power"
+          }
+        }
+      }
+    },
+    "Supervivencia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Survival"
+          }
+        }
+      }
+    },
+    "Suspenso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspense"
+          }
+        }
+      }
+    },
+    "TV": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TV"
+          }
+        }
+      }
+    },
+    "Temas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Themes"
+          }
+        }
+      }
+    },
+    "Terror": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horror"
+          }
+        }
+      }
+    },
+    "Tiempo estimado viendo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated time watching"
+          }
+        }
+      }
+    },
+    "Tipo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
+        }
+      }
+    },
+    "Toca para deseleccionar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to deselect"
+          }
+        }
+      }
+    },
+    "Toca para filtrar por este género": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to filter by this genre"
+          }
+        }
+      }
+    },
+    "Todos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        }
+      }
+    },
+    "Top Anime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Top Anime"
+          }
+        }
+      }
+    },
+    "Top Manga": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Top Manga"
+          }
+        }
+      }
+    },
+    "Traducir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate"
+          }
+        }
+      }
+    },
+    "Travestismo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crossdressing"
+          }
+        }
+      }
+    },
+    "Tu lista de pendientes está vacía": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your plan-to-watch list is empty"
+          }
+        }
+      }
+    },
+    "Valoración media": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Average rating"
+          }
+        }
+      }
+    },
+    "Vampiros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vampire"
+          }
+        }
+      }
+    },
+    "Vanguardista": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant Garde"
+          }
+        }
+      }
+    },
+    "Ver menos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show less"
+          }
+        }
+      }
+    },
+    "Ver más": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show more"
+          }
+        }
+      }
+    },
+    "Ver original": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View original"
+          }
+        }
+      }
+    },
+    "Versión alternativa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alternative Version"
+          }
+        }
+      }
+    },
+    "Viajes en el Tiempo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Travel"
+          }
+        }
+      }
+    },
+    "Videojuegos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Video Game"
+          }
+        }
+      }
+    },
+    "Viendo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watching"
+          }
+        }
+      }
+    },
+    "Viendo actualmente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currently watching"
+          }
+        }
+      }
+    },
+    "Viendo ahora": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watching now"
+          }
+        }
+      }
+    },
+    "Villana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Villainess"
+          }
+        }
+      }
+    },
+    "Volumen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume"
+          }
+        }
+      }
+    },
+    "—": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "—"
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

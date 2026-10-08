@@ -34,7 +34,9 @@ extension Manga {
             popularity: nil,
             members: nil,
             favorites: nil,
-            genres: nil
+            genres: nil,
+            published: nil,
+            relations: nil
         )
     }
 }

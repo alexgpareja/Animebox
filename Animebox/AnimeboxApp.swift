@@ -10,12 +10,18 @@ import SwiftData
 
 @main
 struct AnimeboxApp: App {
-    @State private var malSession = MALSession()
+    @State private var linkedAccount: LinkedAccount
+    @State private var languageSettings = AppLanguageSettings()
+
+    init() {
+        _linkedAccount = State(initialValue: LinkedAccount(mal: MALSession(), aniList: AniListSession()))
+    }
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             LibraryEntry.self,
             MangaLibraryEntry.self,
+            PendingDeletion.self,
         ])
         let modelConfiguration = ModelConfiguration(
             schema: schema,
@@ -34,7 +40,9 @@ struct AnimeboxApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
-                .environment(malSession)
+                .environment(linkedAccount)
+                .environment(languageSettings)
+                .environment(\.locale, languageSettings.language.locale)
         }
         .modelContainer(sharedModelContainer)
     }

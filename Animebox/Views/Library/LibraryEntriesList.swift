@@ -7,6 +7,7 @@ import SwiftUI
 
 struct LibraryEntriesList: View {
     let entries: [LibraryEntry]
+    var isSearching: Bool = false
     let onDelete: (IndexSet) -> Void
     let onIncrement: (LibraryEntry) -> Void
 
@@ -14,7 +15,7 @@ struct LibraryEntriesList: View {
         List {
             ForEach(entries) { entry in
                 NavigationLink(value: Anime(libraryEntry: entry)) {
-                    LibraryEntryRow(entry: entry)
+                    LibraryEntryRow(entry: entry, showsStatus: isSearching)
                 }
                 .listRowBackground(AppColors.cardBackground)
                 .listRowSeparator(.hidden)

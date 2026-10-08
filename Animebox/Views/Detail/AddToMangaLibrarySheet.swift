@@ -10,7 +10,7 @@ struct AddToMangaLibrarySheet: View {
     let manga: Manga
 
     @Environment(\.modelContext) private var context
-    @Environment(MALSession.self) private var malSession
+    @Environment(LinkedAccount.self) private var linkedAccount
     @Environment(\.dismiss) private var dismiss
 
     @State private var status: MangaStatus = .planned
@@ -118,8 +118,10 @@ struct AddToMangaLibrarySheet: View {
     private func prefillIfNeeded() {
         guard !didPrefill else { return }
         didPrefill = true
-        let coordinator = LibrarySyncCoordinator(context: context, session: malSession)
-        guard let existing = coordinator.mangaStore.entry(for: manga.malId) else { return }
+        let coordinator = LibrarySyncCoordinator(context: context, account: linkedAccount)
+        guard let existing = coordinator.mangaStore.entry(
+            for: manga.malId, provider: coordinator.currentProvider
+        ) else { return }
         status = existing.status
         chaptersRead = existing.chaptersRead
         volumesRead = existing.volumesRead
@@ -132,7 +134,7 @@ struct AddToMangaLibrarySheet: View {
     }
 
     private func save() {
-        let coordinator = LibrarySyncCoordinator(context: context, session: malSession)
+        let coordinator = LibrarySyncCoordinator(context: context, account: linkedAccount)
         do {
             try coordinator.upsertManga(
                 manga: manga,

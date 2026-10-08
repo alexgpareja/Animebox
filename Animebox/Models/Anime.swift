@@ -27,6 +27,8 @@ nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable, MediaSummar
     let season: String?
     let genres: [NamedEntity]?
     let studios: [NamedEntity]?
+    let aired: DateRange?
+    let relations: [RelationGroup]?
 
     var id: Int { malId }
 
@@ -36,6 +38,11 @@ nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable, MediaSummar
 
     var posterURL: URL? { images.bestURL }
 
+    /// Temporadas anteriores/siguientes, precuelas/secuelas — filtra
+    /// `relations` a solo entradas de tipo anime (Jikan mezcla anime y
+    /// manga en el mismo array, p. ej. "Adaptation" apunta al manga origen).
+    var relatedAnime: [RelatedEntry] { relations?.relatedEntries(ofType: "anime") ?? [] }
+
     enum CodingKeys: String, CodingKey {
         case malId = "mal_id"
         case url, images, title
@@ -43,7 +50,7 @@ nonisolated struct Anime: Identifiable, Codable, Hashable, Sendable, MediaSummar
         case titleJapanese = "title_japanese"
         case type, episodes, status, airing, synopsis, score
         case scoredBy = "scored_by"
-        case rank, popularity, members, favorites, year, season, genres, studios
+        case rank, popularity, members, favorites, year, season, genres, studios, aired, relations
     }
 }
 

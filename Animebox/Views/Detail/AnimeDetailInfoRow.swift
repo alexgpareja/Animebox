@@ -27,7 +27,7 @@ struct AnimeDetailInfoRow: View {
             if let status = anime.status {
                 StatTile(
                     icon: "clock",
-                    value: Text(status),
+                    value: Text(AnimeAiringStatus(apiValue: status)?.displayName ?? status),
                     title: "Estado"
                 )
             }

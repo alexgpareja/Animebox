@@ -19,6 +19,7 @@ final class MALSession {
 
     private let tokenStore: TokenStoring
     private let authService: MALAuthServicing
+    private var refreshTask: Task<String, Error>?
 
     init(tokenStore: TokenStoring = KeychainTokenStore(), authService: MALAuthServicing? = nil) {
         let authService = authService ?? MALAuthService()
@@ -69,14 +70,25 @@ final class MALSession {
         return try await refreshedAccessToken(currentRefreshToken: tokens.refreshToken)
     }
 
+    /// "Single-flight": si ya hay un refresh en curso, todas las llamadas
+    /// concurrentes esperan al mismo en vez de disparar cada una el suyo con
+    /// el mismo refresh token — MAL rota el refresh token en cada uso, así
+    /// que refrescos paralelos duplicados harían fallar a todos menos al
+    /// primero y cerrarían la sesión de golpe.
     private func refreshedAccessToken(currentRefreshToken: String) async throws -> String {
-        do {
-            let refreshed = try await authService.refresh(currentRefreshToken)
-            try tokenStore.save(refreshed)
-            return refreshed.accessToken
-        } catch {
-            signOut()
-            throw error
+        if let refreshTask { return try await refreshTask.value }
+        let task = Task<String, Error> {
+            do {
+                let refreshed = try await authService.refresh(currentRefreshToken)
+                try tokenStore.save(refreshed)
+                return refreshed.accessToken
+            } catch {
+                signOut()
+                throw error
+            }
         }
+        refreshTask = task
+        defer { refreshTask = nil }
+        return try await task.value
     }
 }

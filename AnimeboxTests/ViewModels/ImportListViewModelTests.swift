@@ -35,8 +35,8 @@ struct ImportListViewModelTests {
     private static let mangaXML = """
     <myanimelist>
     <manga>
-    <series_mangadb_id>2</series_mangadb_id>
-    <series_title><![CDATA[Berserk]]></series_title>
+    <manga_mangadb_id>2</manga_mangadb_id>
+    <manga_title><![CDATA[Berserk]]></manga_title>
     <my_read_chapters>350</my_read_chapters>
     <my_read_volumes>40</my_read_volumes>
     <my_status>Reading</my_status>
@@ -44,36 +44,114 @@ struct ImportListViewModelTests {
     </myanimelist>
     """
 
-    @Test("commitImport crea una entrada de anime nueva y actualiza el estado a .done")
-    func commitImportCreatesAnimeEntry() async throws {
-        let sut = ImportListViewModel()
-        sut.parse(data: Data(Self.animeXML.utf8))
-        guard case .parsed = sut.state else {
-            Issue.record("Esperaba .parsed tras parse(), obtuve \(sut.state)")
-            return
-        }
+    private var coordinator: LibrarySyncCoordinator {
+        LibrarySyncCoordinator(context: container.mainContext, account: LinkedAccount(mal: MALSession(), aniList: AniListSession()))
+    }
 
-        await sut.commitImport(context: container.mainContext)
+    private static let enrichedAnime = Anime(
+        malId: 1,
+        url: nil,
+        images: MediaImages(
+            jpg: ImageSet(imageUrl: "https://cdn.example/cowboy.jpg", smallImageUrl: nil, largeImageUrl: nil),
+            webp: nil
+        ),
+        title: "Cowboy Bebop",
+        titleEnglish: nil,
+        titleJapanese: nil,
+        type: "TV",
+        episodes: 26,
+        status: "Finished Airing",
+        airing: false,
+        synopsis: nil,
+        score: 8.75,
+        scoredBy: nil,
+        rank: nil,
+        popularity: nil,
+        members: nil,
+        favorites: nil,
+        year: nil,
+        season: nil,
+        genres: nil,
+        studios: nil,
+        aired: nil,
+        relations: nil
+    )
+
+    private static let enrichedManga = Manga(
+        malId: 2,
+        url: nil,
+        images: MediaImages(
+            jpg: ImageSet(imageUrl: "https://cdn.example/berserk.jpg", smallImageUrl: nil, largeImageUrl: nil),
+            webp: nil
+        ),
+        title: "Berserk",
+        titleEnglish: nil,
+        titleJapanese: nil,
+        type: "Manga",
+        chapters: nil,
+        volumes: nil,
+        status: "Publishing",
+        publishing: true,
+        synopsis: nil,
+        score: 9.4,
+        scoredBy: nil,
+        rank: nil,
+        popularity: nil,
+        members: nil,
+        favorites: nil,
+        genres: nil,
+        published: nil,
+        relations: nil
+    )
+
+    @Test("importFile crea una entrada de anime enriquecida con la imagen de red y actualiza el estado a .done")
+    func importFileCreatesEnrichedAnimeEntry() async throws {
+        let sut = ImportListViewModel()
+        let service = JikanServiceStub(details: Self.enrichedAnime)
+
+        await sut.importFile(data: Data(Self.animeXML.utf8), service: service, coordinator: coordinator)
 
         guard case .done(let count) = sut.state else {
-            Issue.record("Esperaba .done tras commitImport, obtuve \(sut.state)")
+            Issue.record("Esperaba .done tras importFile, obtuve \(sut.state)")
             return
         }
         #expect(count == 1)
 
         let store = LibraryStore(context: container.mainContext)
-        let entry = try #require(store.entry(for: 1))
+        let entry = try #require(store.entry(for: 1, provider: .mal))
         #expect(entry.title == "Cowboy Bebop")
-        #expect(entry.progress == 26)
+        #expect(entry.imageURL == "https://cdn.example/cowboy.jpg", "debe usar la imagen de la petición de red, no el XML (que no trae imágenes)")
+        #expect(entry.progress == 26, "el progreso viene del XML (dato personal), no de la red")
         #expect(entry.status == .completed)
         #expect(entry.personalScore == 8)
     }
 
-    @Test("commitImport sobrescribe una entrada de anime ya existente con el mismo malId")
-    func commitImportUpdatesExistingAnimeEntry() async throws {
+    @Test("Si la petición de enriquecimiento falla, cae al stub del XML sin abortar el import")
+    func importFileFallsBackWhenEnrichmentFails() async throws {
+        let sut = ImportListViewModel()
+        let service = JikanServiceStub(details: nil) // sin `details` -> animeDetails(id:) lanza
+
+        await sut.importFile(data: Data(Self.animeXML.utf8), service: service, coordinator: coordinator)
+
+        guard case .done(let count) = sut.state else {
+            Issue.record("Esperaba .done incluso con el fetch fallido, obtuve \(sut.state)")
+            return
+        }
+        #expect(count == 1)
+
+        let store = LibraryStore(context: container.mainContext)
+        let entry = try #require(store.entry(for: 1, provider: .mal))
+        #expect(entry.title == "Cowboy Bebop")
+        #expect(entry.imageURL == nil)
+        #expect(entry.progress == 26)
+    }
+
+    @Test("importFile sobrescribe una entrada de anime ya existente con el mismo malId")
+    func importFileUpdatesExistingAnimeEntry() async throws {
         let store = LibraryStore(context: container.mainContext)
         try store.upsert(
             anime: .fixture(id: 1, title: "Título viejo"),
+            provider: .mal,
             status: .planned,
             progress: 0,
             personalScore: nil,
@@ -81,21 +159,22 @@ struct ImportListViewModelTests {
         )
 
         let sut = ImportListViewModel()
-        sut.parse(data: Data(Self.animeXML.utf8))
-        await sut.commitImport(context: container.mainContext)
+        let service = JikanServiceStub(details: Self.enrichedAnime)
+        await sut.importFile(data: Data(Self.animeXML.utf8), service: service, coordinator: coordinator)
 
         let all = try container.mainContext.fetch(FetchDescriptor<LibraryEntry>())
         #expect(all.count == 1, "no debe duplicarse la entrada")
-        let entry = try #require(store.entry(for: 1))
+        let entry = try #require(store.entry(for: 1, provider: .mal))
         #expect(entry.status == .completed)
         #expect(entry.progress == 26)
     }
 
-    @Test("commitImport crea una entrada de manga nueva")
-    func commitImportCreatesMangaEntry() async throws {
+    @Test("importFile crea una entrada de manga enriquecida con la imagen de red")
+    func importFileCreatesEnrichedMangaEntry() async throws {
         let sut = ImportListViewModel()
-        sut.parse(data: Data(Self.mangaXML.utf8))
-        await sut.commitImport(context: container.mainContext)
+        let service = JikanServiceStub(mangaDetailsResult: Self.enrichedManga)
+
+        await sut.importFile(data: Data(Self.mangaXML.utf8), service: service, coordinator: coordinator)
 
         guard case .done(let count) = sut.state else {
             Issue.record("Esperaba .done, obtuve \(sut.state)")
@@ -104,17 +183,20 @@ struct ImportListViewModelTests {
         #expect(count == 1)
 
         let store = MangaStore(context: container.mainContext)
-        let entry = try #require(store.entry(for: 2))
+        let entry = try #require(store.entry(for: 2, provider: .mal))
         #expect(entry.title == "Berserk")
+        #expect(entry.imageURL == "https://cdn.example/berserk.jpg")
         #expect(entry.chaptersRead == 350)
         #expect(entry.volumesRead == 40)
         #expect(entry.status == .reading)
     }
 
     @Test("Un fichero inválido deja el estado en .error sin tocar la biblioteca")
-    func parseInvalidDataSetsErrorState() {
+    func importInvalidDataSetsErrorState() async {
         let sut = ImportListViewModel()
-        sut.parse(data: Data("no xml".utf8))
+        let service = JikanServiceStub()
+
+        await sut.importFile(data: Data("no xml".utf8), service: service, coordinator: coordinator)
 
         guard case .error = sut.state else {
             Issue.record("Esperaba .error, obtuve \(sut.state)")
