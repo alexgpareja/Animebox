@@ -5,7 +5,7 @@
 
 import Foundation
 
-protocol APIServicing: Sendable {
+nonisolated protocol APIServicing: Sendable {
     func get<T: Decodable & Sendable>(_ url: URL, as type: T.Type) async throws -> T
 }
 
