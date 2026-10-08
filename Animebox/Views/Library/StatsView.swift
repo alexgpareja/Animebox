@@ -8,8 +8,12 @@ import SwiftData
 import Charts
 
 struct StatsView: View {
-    @Query private var animeEntries: [LibraryEntry]
-    @Query private var mangaEntries: [MangaLibraryEntry]
+    @Environment(LinkedAccount.self) private var linkedAccount
+    @Query private var allAnimeEntries: [LibraryEntry]
+    @Query private var allMangaEntries: [MangaLibraryEntry]
+
+    private var animeEntries: [LibraryEntry] { allAnimeEntries.filter { $0.provider == linkedAccount.libraryProvider } }
+    private var mangaEntries: [MangaLibraryEntry] { allMangaEntries.filter { $0.provider == linkedAccount.libraryProvider } }
 
     private var stats: LibraryStats {
         LibraryStatsQuery.makeStats(animeEntries: animeEntries, mangaEntries: mangaEntries)
@@ -137,6 +141,7 @@ struct StatsView: View {
         StatsView()
     }
     .modelContainer(PreviewLibrary.makeContainer())
+    .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
     .preferredColorScheme(.dark)
 }
 #endif

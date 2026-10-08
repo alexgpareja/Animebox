@@ -13,8 +13,11 @@ struct HomeView: View {
     @State private var mangaViewModel: MangaHomeViewModel
     @State private var sectionOrderSettings = HomeSectionOrderSettings()
     @State private var isPresentingOrderSheet = false
-    @Query private var watchingEntries: [LibraryEntry]
-    @Query private var readingEntries: [MangaLibraryEntry]
+    @Query private var allWatchingEntries: [LibraryEntry]
+    @Query private var allReadingEntries: [MangaLibraryEntry]
+
+    private var watchingEntries: [LibraryEntry] { allWatchingEntries.filter { $0.provider == linkedAccount.libraryProvider } }
+    private var readingEntries: [MangaLibraryEntry] { allReadingEntries.filter { $0.provider == linkedAccount.libraryProvider } }
 
     init(
         mediaKind: Binding<MediaKind>,
@@ -25,13 +28,13 @@ struct HomeView: View {
         _viewModel = State(initialValue: viewModel)
         _mangaViewModel = State(initialValue: mangaViewModel)
         let watchingRaw = LibraryStatus.watching.rawValue
-        _watchingEntries = Query(
+        _allWatchingEntries = Query(
             filter: #Predicate<LibraryEntry> { $0.statusRaw == watchingRaw },
             sort: \LibraryEntry.updatedAt,
             order: .reverse
         )
         let readingRaw = MangaStatus.reading.rawValue
-        _readingEntries = Query(
+        _allReadingEntries = Query(
             filter: #Predicate<MangaLibraryEntry> { $0.statusRaw == readingRaw },
             sort: \MangaLibraryEntry.updatedAt,
             order: .reverse

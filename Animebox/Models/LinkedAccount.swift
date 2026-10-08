@@ -24,6 +24,12 @@ final class LinkedAccount {
 
     var isSignedIn: Bool { activeProvider != nil }
 
+    /// Proveedor cuyas entradas locales se muestran: el de la cuenta activa,
+    /// o `.mal` en modo invitado (Tenrai comparte el espacio de IDs de MAL).
+    /// Sin este filtro, una serie guardada antes con otro proveedor aparece
+    /// duplicada junto a la que se descarga al iniciar sesión.
+    var libraryProvider: LibraryProvider { activeProvider ?? .mal }
+
     /// Si por algún motivo ambas sesiones tuvieran tokens válidos a la vez
     /// (no debería pasar — la UI de Ajustes cierra una antes de abrir la
     /// otra), MAL gana por ser la que existía primero. No es una elección
