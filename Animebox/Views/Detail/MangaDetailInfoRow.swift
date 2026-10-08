@@ -27,7 +27,7 @@ struct MangaDetailInfoRow: View {
             if let status = manga.status {
                 StatTile(
                     icon: "clock",
-                    value: Text(status),
+                    value: Text(MangaPublishingStatus(apiValue: status)?.displayName ?? status),
                     title: "Estado"
                 )
             }

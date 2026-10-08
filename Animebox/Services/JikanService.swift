@@ -42,7 +42,7 @@ nonisolated struct JikanService: ContentServicing {
     let api: APIServicing
     let baseURL: URL
 
-    init(api: APIServicing = APIService(), baseURL: URL = APIConfig.jikanBaseURL) {
+    init(api: APIServicing = APIService(), baseURL: URL = APIConfig.tenraiBaseURL) {
         self.api = api
         self.baseURL = baseURL
     }
@@ -76,7 +76,7 @@ nonisolated struct JikanService: ContentServicing {
         let trimmedQuery = query?.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasQuery = !(trimmedQuery?.isEmpty ?? true)
         let hasGenres = !(genres?.isEmpty ?? true)
-        let hasOtherFilters = type != nil || rating != nil || startDate != nil
+        let hasOtherFilters = status != nil || type != nil || rating != nil || startDate != nil
         guard hasQuery || hasGenres || hasOtherFilters else { return [] }
 
         var items: [URLQueryItem] = [
@@ -155,7 +155,7 @@ nonisolated struct JikanService: ContentServicing {
         let trimmedQuery = query?.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasQuery = !(trimmedQuery?.isEmpty ?? true)
         let hasGenres = !(genres?.isEmpty ?? true)
-        let hasOtherFilters = type != nil || startDate != nil
+        let hasOtherFilters = status != nil || type != nil || startDate != nil
         guard hasQuery || hasGenres || hasOtherFilters else { return [] }
 
         var items: [URLQueryItem] = [

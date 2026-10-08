@@ -17,7 +17,7 @@ struct MediaDetailGenres: View {
             ScrollView(.horizontal) {
                 HStack(spacing: AppSpacing.microSpacing) {
                     ForEach(genres) { genre in
-                        GenrePill(title: genre.name)
+                        GenrePill(title: genre.localizedDisplayName)
                     }
                 }
             }

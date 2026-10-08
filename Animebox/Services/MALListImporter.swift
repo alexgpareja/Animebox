@@ -44,8 +44,11 @@ private final class Delegate: NSObject, XMLParserDelegate {
         "my_watched_episodes", "my_score", "my_status",
         "my_start_date", "my_finish_date"
     ]
+    /// A diferencia del export de anime (prefijo `series_*`), el export real
+    /// de manga de MAL usa el prefijo `manga_*` para estos mismos campos —
+    /// no es un alias, son nombres de etiqueta distintos.
     private static let mangaFields: Set<String> = [
-        "series_mangadb_id", "series_title", "series_chapters", "series_volumes",
+        "manga_mangadb_id", "manga_title", "manga_chapters", "manga_volumes",
         "my_read_chapters", "my_read_volumes", "my_score", "my_status",
         "my_start_date", "my_finish_date"
     ]
@@ -124,12 +127,12 @@ private final class Delegate: NSObject, XMLParserDelegate {
     }
 
     private static func makeMangaEntry(from fields: [String: String]) -> MALMangaImportEntry? {
-        guard let malId = fields["series_mangadb_id"].flatMap(Int.init), malId > 0 else { return nil }
+        guard let malId = fields["manga_mangadb_id"].flatMap(Int.init), malId > 0 else { return nil }
         return MALMangaImportEntry(
             malId: malId,
-            title: fields["series_title"] ?? "",
-            totalChapters: positiveInt(fields["series_chapters"]),
-            totalVolumes: positiveInt(fields["series_volumes"]),
+            title: fields["manga_title"] ?? "",
+            totalChapters: positiveInt(fields["manga_chapters"]),
+            totalVolumes: positiveInt(fields["manga_volumes"]),
             chaptersRead: fields["my_read_chapters"].flatMap(Int.init) ?? 0,
             volumesRead: fields["my_read_volumes"].flatMap(Int.init) ?? 0,
             personalScore: positiveInt(fields["my_score"]),

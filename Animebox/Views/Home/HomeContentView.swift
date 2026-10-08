@@ -11,6 +11,7 @@ struct HomeContentView: View {
     let currentSeason: [Anime]
     let errorMessage: String?
     let retry: () -> Void
+    var sectionOrder: [HomeSectionSlot] = HomeSectionSlot.allCases
 
     var body: some View {
         if topAnime.isEmpty {
@@ -22,12 +23,24 @@ struct HomeContentView: View {
         } else {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.sectionSpacing) {
-                    WatchingNowSection(entries: watching)
-                    HomeMediaSection(title: "Top Anime", items: topAnime)
-                    HomeMediaSection(title: "En Emisión", items: currentSeason)
+                    ForEach(sectionOrder) { slot in
+                        section(for: slot)
+                    }
                 }
                 .padding(.vertical, AppSpacing.padding)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func section(for slot: HomeSectionSlot) -> some View {
+        switch slot {
+        case .continuing:
+            WatchingNowSection(entries: watching)
+        case .topRanked:
+            HomeMediaSection(title: "Top Anime", items: topAnime)
+        case .seasonal:
+            HomeMediaSection(title: "En Emisión", items: currentSeason)
         }
     }
 }

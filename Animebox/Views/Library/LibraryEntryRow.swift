@@ -7,6 +7,10 @@ import SwiftUI
 
 struct LibraryEntryRow: View {
     let entry: LibraryEntry
+    /// Se muestra al buscar (los resultados abarcan todos los estados, no
+    /// solo la pestaña activa) para que el usuario sepa dónde está sin
+    /// necesidad de abrir el detalle.
+    var showsStatus: Bool = false
 
     var body: some View {
         HStack(spacing: AppSpacing.itemSpacing) {
@@ -16,6 +20,14 @@ struct LibraryEntryRow: View {
                     .font(.subheadline)
                     .foregroundStyle(AppColors.textPrimary)
                     .lineLimit(2, reservesSpace: true)
+                if showsStatus {
+                    Text(entry.status.displayName)
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(AppColors.primary)
+                        .padding(.horizontal, AppSpacing.compactSpacing)
+                        .padding(.vertical, 2)
+                        .background(AppColors.primary.opacity(0.15), in: .capsule)
+                }
                 LibraryEntryProgressLabel(
                     progress: entry.progress,
                     total: entry.totalEpisodes

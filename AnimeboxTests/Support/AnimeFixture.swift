@@ -36,7 +36,9 @@ extension Anime {
             year: nil,
             season: nil,
             genres: nil,
-            studios: nil
+            studios: nil,
+            aired: nil,
+            relations: nil
         )
     }
 }

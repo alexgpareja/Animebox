@@ -16,11 +16,11 @@ enum LibraryStatus: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var displayName: String {
         switch self {
-        case .watching: String(localized: "Viendo")
-        case .onHold: String(localized: "En pausa")
-        case .completed: String(localized: "Completado")
-        case .dropped: String(localized: "Abandonado")
-        case .planned: String(localized: "Planeado")
+        case .watching: AppLanguage.current.string("Viendo")
+        case .onHold: AppLanguage.current.string("En pausa")
+        case .completed: AppLanguage.current.string("Completado")
+        case .dropped: AppLanguage.current.string("Abandonado")
+        case .planned: AppLanguage.current.string("Planeado")
         }
     }
 

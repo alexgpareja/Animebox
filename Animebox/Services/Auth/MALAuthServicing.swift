@@ -22,15 +22,15 @@ enum MALAuthError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .cancelled:
-            String(localized: "Inicio de sesión cancelado.")
+            AppLanguage.current.string("Inicio de sesión cancelado.")
         case .invalidCallback:
-            String(localized: "MyAnimeList no devolvió un código de autorización válido.")
+            AppLanguage.current.string("MyAnimeList no devolvió un código de autorización válido.")
         case .stateMismatch:
-            String(localized: "La respuesta de MyAnimeList no coincide con la petición original.")
+            AppLanguage.current.string("La respuesta de MyAnimeList no coincide con la petición original.")
         case .tokenExchangeFailed:
-            String(localized: "No se pudo completar el inicio de sesión con MyAnimeList.")
+            AppLanguage.current.string("No se pudo completar el inicio de sesión con MyAnimeList.")
         case .notSignedIn:
-            String(localized: "No has iniciado sesión con MyAnimeList.")
+            AppLanguage.current.string("No has iniciado sesión con MyAnimeList.")
         }
     }
 }

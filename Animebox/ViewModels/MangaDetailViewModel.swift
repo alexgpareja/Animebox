@@ -26,7 +26,7 @@ final class MangaDetailViewModel {
     }
 
     func refreshDetails() async {
-        guard state == .idle else { return }
+        guard state != .refreshing else { return }
         state = .refreshing
         do {
             let full = try await service.mangaDetails(id: manga.malId)

@@ -61,20 +61,20 @@ struct MALListImporterTests {
     <user_id>123</user_id>
     </myinfo>
     <manga>
-    <series_mangadb_id>2</series_mangadb_id>
-    <series_title><![CDATA[Berserk]]></series_title>
-    <series_chapters>0</series_chapters>
-    <series_volumes>0</series_volumes>
+    <manga_mangadb_id>2</manga_mangadb_id>
+    <manga_title><![CDATA[Berserk]]></manga_title>
+    <manga_volumes>0</manga_volumes>
+    <manga_chapters>0</manga_chapters>
     <my_read_chapters>350</my_read_chapters>
     <my_read_volumes>40</my_read_volumes>
     <my_score>10</my_score>
     <my_status>Reading</my_status>
     </manga>
     <manga>
-    <series_mangadb_id>11</series_mangadb_id>
-    <series_title><![CDATA[Naruto]]></series_title>
-    <series_chapters>700</series_chapters>
-    <series_volumes>72</series_volumes>
+    <manga_mangadb_id>11</manga_mangadb_id>
+    <manga_title><![CDATA[Naruto]]></manga_title>
+    <manga_volumes>72</manga_volumes>
+    <manga_chapters>700</manga_chapters>
     <my_read_chapters>700</my_read_chapters>
     <my_read_volumes>72</my_read_volumes>
     <my_score>8</my_score>
@@ -129,7 +129,7 @@ struct MALListImporterTests {
         #expect(berserk.title == "Berserk")
         #expect(berserk.chaptersRead == 350)
         #expect(berserk.volumesRead == 40)
-        #expect(berserk.totalChapters == nil, "series_chapters=0 significa desconocido/en curso")
+        #expect(berserk.totalChapters == nil, "manga_chapters=0 significa desconocido/en curso")
         #expect(berserk.status == .reading)
         #expect(berserk.personalScore == 10)
 

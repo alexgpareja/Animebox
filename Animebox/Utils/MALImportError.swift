@@ -12,9 +12,9 @@ nonisolated enum MALImportError: LocalizedError, Sendable, Equatable {
     var errorDescription: String? {
         switch self {
         case .invalidXML:
-            String(localized: "El fichero no parece ser una exportación válida de MyAnimeList.")
+            AppLanguage.current.string("El fichero no parece ser una exportación válida de MyAnimeList.")
         case .emptyList:
-            String(localized: "El fichero no contiene ninguna entrada de anime o manga.")
+            AppLanguage.current.string("El fichero no contiene ninguna entrada de anime o manga.")
         }
     }
 }

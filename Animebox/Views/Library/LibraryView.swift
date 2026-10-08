@@ -7,7 +7,7 @@ import SwiftUI
 import SwiftData
 
 struct LibraryView: View {
-    @Environment(MALSession.self) private var malSession
+    @Environment(LinkedAccount.self) private var linkedAccount
     @Binding var mediaKind: MediaKind
     @State private var selectedStatus: LibraryStatus = .watching
     @State private var selectedMangaStatus: MangaStatus = .reading
@@ -17,8 +17,10 @@ struct LibraryView: View {
 
     @State private var presentingError = false
     @State private var errorMessage = ""
-    @State private var isPresentingImport = false
-    @State private var isPresentingAccount = false
+    @State private var isPresentingSettings = false
+    @State private var searchQuery = ""
+    @State private var sortOption: LibrarySortOption = .recentlyAdded
+    @State private var sortAscending = LibrarySortOption.recentlyAdded.defaultAscending
 
     var body: some View {
         VStack(spacing: 0) {
@@ -29,6 +31,7 @@ struct LibraryView: View {
                 LibraryContent(
                     entries: filteredEntries,
                     status: selectedStatus,
+                    searchQuery: searchQuery,
                     onDelete: deleteAnime,
                     onIncrement: incrementAnime
                 )
@@ -37,6 +40,7 @@ struct LibraryView: View {
                 MangaLibraryContent(
                     entries: filteredMangaEntries,
                     status: selectedMangaStatus,
+                    searchQuery: searchQuery,
                     onDelete: deleteManga,
                     onIncrement: incrementManga
                 )
@@ -47,36 +51,53 @@ struct LibraryView: View {
         .animation(.easeInOut(duration: 0.2), value: selectedMangaStatus)
         .background(AppColors.background.ignoresSafeArea())
         .navigationTitle("Biblioteca")
+        .searchable(text: $searchQuery, prompt: Text("Buscar en tu biblioteca"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    isPresentingAccount = true
+                    isPresentingSettings = true
                 } label: {
                     Label(
-                        "Cuenta",
-                        systemImage: malSession.isSignedIn ? "person.crop.circle.fill" : "person.crop.circle"
+                        "Ajustes",
+                        systemImage: linkedAccount.isSignedIn ? "gearshape.fill" : "gearshape"
                     )
                 }
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    isPresentingImport = true
+                Menu {
+                    ForEach(LibrarySortOption.allCases) { option in
+                        Button {
+                            if sortOption == option {
+                                sortAscending.toggle()
+                            } else {
+                                sortOption = option
+                                sortAscending = option.defaultAscending
+                            }
+                        } label: {
+                            let isSelected = sortOption == option
+                            let ascending = isSelected ? sortAscending : option.defaultAscending
+                            HStack {
+                                Label(option.label(ascending: ascending), systemImage: option.systemImage)
+                                if isSelected {
+                                    Spacer()
+                                    Image(systemName: ascending ? "chevron.up" : "chevron.down")
+                                }
+                            }
+                        }
+                    }
                 } label: {
-                    Label("Importar", systemImage: "square.and.arrow.down")
+                    Label("Ordenar", systemImage: "arrow.up.arrow.down")
                 }
             }
         }
-        .sheet(isPresented: $isPresentingImport) {
-            ImportListSheet()
-        }
-        .sheet(isPresented: $isPresentingAccount) {
-            AccountSheet(viewModel: AccountViewModel(session: malSession))
+        .sheet(isPresented: $isPresentingSettings) {
+            SettingsSheet(viewModel: AccountViewModel(account: linkedAccount))
         }
         .navigationDestination(for: Anime.self) { anime in
-            AnimeDetailView(anime: anime, service: ContentRouter(session: malSession))
+            AnimeDetailView(anime: anime, service: ContentRouter(account: linkedAccount))
         }
         .navigationDestination(for: Manga.self) { manga in
-            MangaDetailView(manga: manga, service: ContentRouter(session: malSession))
+            MangaDetailView(manga: manga, service: ContentRouter(account: linkedAccount))
         }
         .alert("No se pudo guardar el cambio", isPresented: $presentingError) {
             Button("OK", role: .cancel) { }
@@ -86,15 +107,21 @@ struct LibraryView: View {
     }
 
     private var filteredEntries: [LibraryEntry] {
-        entries.filter { $0.status == selectedStatus }
+        let base = searchQuery.isEmpty
+            ? entries.filter { $0.status == selectedStatus }
+            : entries.filter { $0.title.localizedCaseInsensitiveContains(searchQuery) }
+        return base.sorted(by: sortOption, ascending: sortAscending)
     }
 
     private var filteredMangaEntries: [MangaLibraryEntry] {
-        mangaEntries.filter { $0.status == selectedMangaStatus }
+        let base = searchQuery.isEmpty
+            ? mangaEntries.filter { $0.status == selectedMangaStatus }
+            : mangaEntries.filter { $0.title.localizedCaseInsensitiveContains(searchQuery) }
+        return base.sorted(by: sortOption, ascending: sortAscending)
     }
 
     private var coordinator: LibrarySyncCoordinator {
-        LibrarySyncCoordinator(context: context, session: malSession)
+        LibrarySyncCoordinator(context: context, account: linkedAccount)
     }
 
     private func deleteAnime(at offsets: IndexSet) {
@@ -139,7 +166,7 @@ struct LibraryView: View {
         LibraryView(mediaKind: .constant(.anime))
     }
     .modelContainer(PreviewLibrary.makeContainer())
-    .environment(MALSession())
+    .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
     .preferredColorScheme(.dark)
 }
 #endif

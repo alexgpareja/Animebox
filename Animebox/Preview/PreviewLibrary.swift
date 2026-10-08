@@ -16,7 +16,7 @@ enum PreviewLibrary {
         let container: ModelContainer
         do {
             container = try ModelContainer(
-                for: LibraryEntry.self, MangaLibraryEntry.self,
+                for: LibraryEntry.self, MangaLibraryEntry.self, PendingDeletion.self,
                 configurations: ModelConfiguration(isStoredInMemoryOnly: true)
             )
         } catch {

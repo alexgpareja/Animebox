@@ -18,13 +18,13 @@ enum AnimeTypeFilter: String, CaseIterable, Identifiable, Hashable, Sendable {
 
     var displayName: String {
         switch self {
-        case .all: String(localized: "Todos")
-        case .tv: String(localized: "TV")
-        case .movie: String(localized: "Película")
-        case .ova: String(localized: "OVA")
-        case .special: String(localized: "Especial")
-        case .ona: String(localized: "ONA")
-        case .music: String(localized: "Música")
+        case .all: AppLanguage.current.string("Todos")
+        case .tv: AppLanguage.current.string("TV")
+        case .movie: AppLanguage.current.string("Película")
+        case .ova: AppLanguage.current.string("OVA")
+        case .special: AppLanguage.current.string("Especial")
+        case .ona: AppLanguage.current.string("ONA")
+        case .music: AppLanguage.current.string("Música")
         }
     }
 

@@ -9,6 +9,7 @@ import SwiftData
 struct AnimeDetailView: View {
     @State private var viewModel: AnimeDetailViewModel
     @Query private var entries: [LibraryEntry]
+    @Environment(LinkedAccount.self) private var linkedAccount
     @State private var isPresentingAddSheet = false
 
     init(anime: Anime, service: ContentServicing = JikanService()) {
@@ -18,21 +19,35 @@ struct AnimeDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.padding) {
-                MediaDetailHero(item: viewModel.anime)
-                AnimeDetailInfoRow(anime: viewModel.anime)
-                AddToLibraryButton(title: libraryButtonTitle) {
-                    isPresentingAddSheet = true
+        Group {
+            if case .error(let message) = viewModel.state {
+                ErrorView(message: message) {
+                    Task { await viewModel.refreshDetails() }
                 }
-                if let genres = viewModel.anime.genres, !genres.isEmpty {
-                    MediaDetailGenres(genres: genres)
-                }
-                if let synopsis = viewModel.anime.synopsis, !synopsis.isEmpty {
-                    AnimeDetailSynopsis(text: synopsis)
+            } else {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: AppSpacing.padding) {
+                        MediaDetailHero(item: viewModel.anime)
+                        AnimeDetailInfoRow(anime: viewModel.anime)
+                        AddToLibraryButton(title: libraryButtonTitle) {
+                            isPresentingAddSheet = true
+                        }
+                        if let genres = viewModel.anime.genres, !genres.isEmpty {
+                            MediaDetailGenres(genres: genres)
+                        }
+                        MediaDetailBasics(
+                            type: viewModel.anime.type,
+                            dateRangeText: AiredDateFormatter.rangeString(from: viewModel.anime.aired),
+                            dateLabel: "Emisión"
+                        )
+                        if let synopsis = viewModel.anime.synopsis, !synopsis.isEmpty {
+                            AnimeDetailSynopsis(text: synopsis)
+                        }
+                        RelatedMediaSection(entries: viewModel.anime.relatedAnime) { Anime(relatedEntry: $0) }
+                    }
+                    .padding(AppSpacing.padding)
                 }
             }
-            .padding(AppSpacing.padding)
         }
         .background(AppColors.background.ignoresSafeArea())
         .navigationTitle(viewModel.anime.displayTitle)
@@ -48,8 +63,15 @@ struct AnimeDetailView: View {
         }
     }
 
+    /// `entries` filtra solo por `malId` (el `@Query` se declara en `init`,
+    /// sin acceso al entorno) — el filtro por proveedor activo se aplica
+    /// aquí para no confundir un show de MAL con uno de AniList que
+    /// comparta número por coincidencia (espacios de ID distintos).
     private var libraryButtonTitle: LocalizedStringKey {
-        entries.isEmpty ? "Añadir a Mi Biblioteca" : "Editar en Mi Biblioteca"
+        let provider = linkedAccount.activeProvider ?? .mal
+        return entries.contains(where: { $0.provider == provider })
+            ? "Editar en Mi Biblioteca"
+            : "Añadir a Mi Biblioteca"
     }
 }
 
@@ -59,6 +81,7 @@ struct AnimeDetailView: View {
         AnimeDetailView(anime: PreviewSamples.animes[0], service: PreviewJikanService())
     }
     .modelContainer(for: LibraryEntry.self, inMemory: true)
+    .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
     .preferredColorScheme(.dark)
 }
 #endif

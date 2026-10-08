@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026231ADD9734D356E4A0584 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096C4A0810D2B9D7ED3D48 /* AppLanguage.swift */; };
 		3DA2968AABAB42F4EBC110F6 /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0893809B36546D5B70FE145 /* LibraryEntry.swift */; };
 		806A134BF1DEEDBCC455C9E4 /* LibraryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9B71A6AFC413B21C28551 /* LibraryStatus.swift */; };
 		B7FFACD54D38EDAB1105E5FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD2BCA5472A0C4E5BEB5273 /* Constants.swift */; };
+		CDC5D1DCB667FB30D01E1418 /* LibraryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354398083EE7C082F1FEF5E3 /* LibraryProvider.swift */; };
 		DBA0B4C0167050C5F079F726 /* AnimeboxWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E2FF6CD0924CED6B759A9EA3 /* AnimeboxWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F2BC4F5074ECD0E801A68D28 /* WatchingNowQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700484BE610A01A33752927 /* WatchingNowQuery.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		354398083EE7C082F1FEF5E3 /* LibraryProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryProvider.swift; path = Animebox/Models/LibraryProvider.swift; sourceTree = "<group>"; };
+		84096C4A0810D2B9D7ED3D48 /* AppLanguage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppLanguage.swift; path = Animebox/Models/AppLanguage.swift; sourceTree = "<group>"; };
 		A3C9B71A6AFC413B21C28551 /* LibraryStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryStatus.swift; path = Animebox/Models/LibraryStatus.swift; sourceTree = "<group>"; };
 		B0893809B36546D5B70FE145 /* LibraryEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryEntry.swift; path = Animebox/Models/LibraryEntry.swift; sourceTree = "<group>"; };
 		BCD2BCA5472A0C4E5BEB5273 /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Animebox/Utils/Constants.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 				BCD2BCA5472A0C4E5BEB5273 /* Constants.swift */,
 				EB9F0F0FE1C3E21988C09EEC /* Secrets.xcconfig */,
 				F977FAF95FFB05144C9D3B67 /* Secrets.xcconfig.example */,
+				84096C4A0810D2B9D7ED3D48 /* AppLanguage.swift */,
+				354398083EE7C082F1FEF5E3 /* LibraryProvider.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -349,6 +355,8 @@
 				806A134BF1DEEDBCC455C9E4 /* LibraryStatus.swift in Sources */,
 				F2BC4F5074ECD0E801A68D28 /* WatchingNowQuery.swift in Sources */,
 				B7FFACD54D38EDAB1105E5FA /* Constants.swift in Sources */,
+				026231ADD9734D356E4A0584 /* AppLanguage.swift in Sources */,
+				CDC5D1DCB667FB30D01E1418 /* LibraryProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

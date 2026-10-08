@@ -10,8 +10,14 @@ import UniformTypeIdentifiers
 struct ImportListSheet: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(LinkedAccount.self) private var linkedAccount
     @State private var viewModel = ImportListViewModel()
     @State private var isPresentingFilePicker = false
+
+    /// Se dispara tras un import completado con éxito (no al cancelar) — el
+    /// presentador la usa para cerrar también la sheet de Ajustes y dejar al
+    /// usuario viendo directamente los registros nuevos en la Biblioteca.
+    var onImportFinished: () -> Void = {}
 
     var body: some View {
         NavigationStack {
@@ -36,10 +42,8 @@ struct ImportListSheet: View {
         switch viewModel.state {
         case .idle:
             idleView
-        case .parsed(let result):
-            parsedView(result)
-        case .importing:
-            LoadingView()
+        case .importing(let current, let total, let kind):
+            importingView(current: current, total: total, kind: kind)
         case .done(let count):
             doneView(count: count)
         case .error(let message):
@@ -73,20 +77,22 @@ struct ImportListSheet: View {
         .background(AppColors.background.ignoresSafeArea())
     }
 
-    private func parsedView(_ result: MALImportResult) -> some View {
+    private func importingView(current: Int, total: Int, kind: MediaKind) -> some View {
         VStack(spacing: AppSpacing.itemSpacing) {
             Image(systemName: "checkmark.circle")
                 .font(.system(size: 44))
                 .foregroundStyle(AppColors.primary)
-            Text(summaryText(for: result))
+            Text(foundText(total: total, kind: kind))
                 .font(.title3.bold())
                 .foregroundStyle(AppColors.textPrimary)
                 .multilineTextAlignment(.center)
-            Button("Importar") {
-                Task { await viewModel.commitImport(context: context) }
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(AppColors.primary)
+            ProgressView(value: Double(current), total: Double(max(total, 1)))
+                .tint(AppColors.primary)
+                .padding(.horizontal, AppSpacing.padding)
+            Text("Importando \(current) de \(total)…")
+                .font(.footnote)
+                .foregroundStyle(AppColors.textSecondary)
+                .monospacedDigit()
         }
         .padding(AppSpacing.padding)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -101,34 +107,42 @@ struct ImportListSheet: View {
             Text("\(count) series importadas")
                 .font(.title3.bold())
                 .foregroundStyle(AppColors.textPrimary)
-            Button("Listo") { dismiss() }
-                .buttonStyle(.borderedProminent)
-                .tint(AppColors.primary)
         }
         .padding(AppSpacing.padding)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColors.background.ignoresSafeArea())
+        .accessibilityElement(children: .combine)
+        .task {
+            // Pausa breve para que el mensaje sea legible (y VoiceOver tenga
+            // tiempo de anunciarlo) antes de volver solo a Biblioteca.
+            try? await Task.sleep(for: .milliseconds(900))
+            onImportFinished()
+        }
     }
 
-    private func summaryText(for result: MALImportResult) -> LocalizedStringKey {
-        switch result {
-        case .anime(let entries):
-            "Se encontraron \(entries.count) animes en el fichero."
-        case .manga(let entries):
-            "Se encontraron \(entries.count) mangas en el fichero."
+    private func foundText(total: Int, kind: MediaKind) -> LocalizedStringKey {
+        switch kind {
+        case .anime: "Se encontraron \(total) animes en el fichero."
+        case .manga: "Se encontraron \(total) mangas en el fichero."
         }
     }
 
     private func handlePickedFile(_ result: Result<URL, Error>) {
         switch result {
         case .success(let url):
-            let didAccess = url.startAccessingSecurityScopedResource()
-            defer { if didAccess { url.stopAccessingSecurityScopedResource() } }
-            do {
-                let data = try Data(contentsOf: url)
-                viewModel.parse(data: data)
-            } catch {
-                viewModel.fail(error)
+            Task {
+                let didAccess = url.startAccessingSecurityScopedResource()
+                defer { if didAccess { url.stopAccessingSecurityScopedResource() } }
+                do {
+                    let data = try Data(contentsOf: url)
+                    await viewModel.importFile(
+                        data: data,
+                        service: ContentRouter(account: linkedAccount),
+                        coordinator: LibrarySyncCoordinator(context: context, account: linkedAccount)
+                    )
+                } catch {
+                    viewModel.fail(error)
+                }
             }
         case .failure(let error):
             viewModel.fail(error)
@@ -140,6 +154,7 @@ struct ImportListSheet: View {
 #Preview {
     ImportListSheet()
         .modelContainer(for: [LibraryEntry.self, MangaLibraryEntry.self], inMemory: true)
+        .environment(LinkedAccount(mal: MALSession(), aniList: AniListSession()))
         .preferredColorScheme(.dark)
 }
 #endif

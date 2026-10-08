@@ -7,6 +7,7 @@ import SwiftUI
 
 struct MangaLibraryEntriesList: View {
     let entries: [MangaLibraryEntry]
+    var isSearching: Bool = false
     let onDelete: (IndexSet) -> Void
     let onIncrement: (MangaLibraryEntry) -> Void
 
@@ -14,7 +15,7 @@ struct MangaLibraryEntriesList: View {
         List {
             ForEach(entries) { entry in
                 NavigationLink(value: Manga(libraryEntry: entry)) {
-                    MangaLibraryEntryRow(entry: entry)
+                    MangaLibraryEntryRow(entry: entry, showsStatus: isSearching)
                 }
                 .listRowBackground(AppColors.cardBackground)
                 .listRowSeparator(.hidden)

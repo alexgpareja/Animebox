@@ -29,6 +29,10 @@ struct MALContentService: ContentServicing {
         + "num_list_users,genres,studios,media_type,status,num_episodes,start_season"
     static let mangaFields = "id,title,main_picture,alternative_titles,synopsis,mean,rank,popularity,"
         + "num_list_users,genres,media_type,status,num_chapters,num_volumes"
+    /// Solo para el detalle (no las listas/búsqueda) — `related_anime`/`start_date`/`end_date`
+    /// abultan la respuesta y no aportan nada en una grid de resultados.
+    static let animeDetailFields = animeFields + ",start_date,end_date,related_anime"
+    static let mangaDetailFields = mangaFields + ",start_date,end_date,related_manga"
 
     func topAnime(limit: Int = 25) async throws -> [Anime] {
         try await fetchAnimeNodes(path: "anime/ranking", extra: [
@@ -56,12 +60,13 @@ struct MALContentService: ContentServicing {
         limit: Int = 25
     ) async throws -> [Anime] {
         let trimmedQuery = query?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let hasFilters = !(genres?.isEmpty ?? true) || type != nil || startDate != nil || endDate != nil
+        let hasFilters = status != nil || !(genres?.isEmpty ?? true) || type != nil || startDate != nil || endDate != nil
         guard !(trimmedQuery?.isEmpty ?? true) || hasFilters else { return [] }
 
         let pool = try await animePool(query: trimmedQuery, limit: limit)
         let filtered = pool.filter { node in
-            matchesGenres(node.genres?.map(\.id), selected: genres)
+            matchesAnimeStatus(node.status, selected: status)
+                && matchesGenres(node.genres?.map(\.id), selected: genres)
                 && matchesType(node.mediaType, selected: type)
                 && matchesYear(node.startSeason?.year, startDate: startDate, endDate: endDate)
         }
@@ -70,7 +75,7 @@ struct MALContentService: ContentServicing {
 
     func animeDetails(id: Int) async throws -> Anime {
         let url = try makeURL(path: "anime/\(id)", query: [
-            URLQueryItem(name: "fields", value: Self.animeFields)
+            URLQueryItem(name: "fields", value: Self.animeDetailFields)
         ])
         return Anime(malNode: try await api.get(url, as: MALAnimeNode.self))
     }
@@ -115,12 +120,13 @@ struct MALContentService: ContentServicing {
         limit: Int = 25
     ) async throws -> [Manga] {
         let trimmedQuery = query?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let hasFilters = !(genres?.isEmpty ?? true) || type != nil || startDate != nil || endDate != nil
+        let hasFilters = status != nil || !(genres?.isEmpty ?? true) || type != nil || startDate != nil || endDate != nil
         guard !(trimmedQuery?.isEmpty ?? true) || hasFilters else { return [] }
 
         let pool = try await mangaPool(query: trimmedQuery, limit: limit)
         let filtered = pool.filter { node in
-            matchesGenres(node.genres?.map(\.id), selected: genres)
+            matchesMangaStatus(node.status, selected: status)
+                && matchesGenres(node.genres?.map(\.id), selected: genres)
                 && matchesType(node.mediaType, selected: type)
         }
         return Array(filtered.prefix(limit)).map(Manga.init(malNode:))
@@ -128,7 +134,7 @@ struct MALContentService: ContentServicing {
 
     func mangaDetails(id: Int) async throws -> Manga {
         let url = try makeURL(path: "manga/\(id)", query: [
-            URLQueryItem(name: "fields", value: Self.mangaFields)
+            URLQueryItem(name: "fields", value: Self.mangaDetailFields)
         ])
         return Manga(malNode: try await api.get(url, as: MALMangaNode.self))
     }
@@ -188,9 +194,46 @@ struct MALContentService: ContentServicing {
         return Set(selected).isSubset(of: Set(nodeGenreIDs))
     }
 
+    /// `selected` llega en el vocabulario compacto de `SearchStatusFilter`
+    /// ("airing"/"complete"/"upcoming"), MAL usa snake_case distinto por campo.
+    private func matchesAnimeStatus(_ nodeStatus: String?, selected: String?) -> Bool {
+        guard let selected else { return true }
+        let expected: String
+        switch selected {
+        case "airing": expected = "currently_airing"
+        case "complete": expected = "finished_airing"
+        case "upcoming": expected = "not_yet_aired"
+        default: expected = selected
+        }
+        return nodeStatus == expected
+    }
+
+    /// Ver `matchesAnimeStatus` — mismo motivo, vocabulario de `MangaSearchStatusFilter`.
+    private func matchesMangaStatus(_ nodeStatus: String?, selected: String?) -> Bool {
+        guard let selected else { return true }
+        let expected: String
+        switch selected {
+        case "publishing": expected = "currently_publishing"
+        case "complete": expected = "finished"
+        case "upcoming": expected = "not_yet_published"
+        default: expected = selected
+        }
+        return nodeStatus == expected
+    }
+
+    /// `selected` llega en el vocabulario compacto de `MangaTypeFilter`/`AnimeTypeFilter`
+    /// (compatible con el filtro de Jikan), pero `node.mediaType` de MAL usa
+    /// snake_case para tres tipos de manga — se normaliza antes de comparar.
+    private static let malMangaTypeAliases: [String: String] = [
+        "light_novel": "lightnovel",
+        "one_shot": "oneshot",
+        "doujinshi": "doujin"
+    ]
+
     private func matchesType(_ nodeType: String?, selected: String?) -> Bool {
         guard let selected else { return true }
-        return nodeType?.caseInsensitiveCompare(selected) == .orderedSame
+        let normalizedNodeType = nodeType.map { Self.malMangaTypeAliases[$0] ?? $0 }
+        return normalizedNodeType?.caseInsensitiveCompare(selected) == .orderedSame
     }
 
     private func matchesYear(_ nodeYear: Int?, startDate: String?, endDate: String?) -> Bool {

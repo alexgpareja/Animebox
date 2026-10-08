@@ -25,6 +25,8 @@ nonisolated struct Manga: Identifiable, Codable, Hashable, Sendable, MediaSummar
     let members: Int?
     let favorites: Int?
     let genres: [NamedEntity]?
+    let published: DateRange?
+    let relations: [RelationGroup]?
 
     var id: Int { malId }
 
@@ -34,6 +36,9 @@ nonisolated struct Manga: Identifiable, Codable, Hashable, Sendable, MediaSummar
 
     var posterURL: URL? { images.bestURL }
 
+    /// Ver `Anime.relatedAnime` — mismo mecanismo, filtrado a tipo manga.
+    var relatedManga: [RelatedEntry] { relations?.relatedEntries(ofType: "manga") ?? [] }
+
     enum CodingKeys: String, CodingKey {
         case malId = "mal_id"
         case url, images, title
@@ -41,6 +46,6 @@ nonisolated struct Manga: Identifiable, Codable, Hashable, Sendable, MediaSummar
         case titleJapanese = "title_japanese"
         case type, chapters, volumes, status, publishing, synopsis, score
         case scoredBy = "scored_by"
-        case rank, popularity, members, favorites, genres
+        case rank, popularity, members, favorites, genres, published, relations
     }
 }

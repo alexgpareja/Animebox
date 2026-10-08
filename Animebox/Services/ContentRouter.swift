@@ -5,29 +5,45 @@
 
 import Foundation
 
-/// Reenvía cada método de `ContentServicing` a Jikan (invitado) o a MAL
-/// (sesión iniciada), comprobando `session.isSignedIn` **en cada llamada**,
-/// no al construirse — así un login hecho en otra pestaña cambia de
-/// inmediato lo que devuelve Buscar/Inicio, sin recablear nada reactivo. Los
-/// ViewModels no necesitan saber que este router existe: siguen recibiendo
-/// un `ContentServicing` cualquiera, exactamente como con `JikanService` solo.
+/// Reenvía cada método de `ContentServicing` a Tenrai (invitado), MAL o
+/// AniList (según cuál esté activa), comprobando `account.activeProvider`
+/// **en cada llamada**, no al construirse — así un login hecho en otra
+/// pestaña cambia de inmediato lo que devuelve Buscar/Inicio, sin recablear
+/// nada reactivo. Los ViewModels no necesitan saber que este router existe:
+/// siguen recibiendo un `ContentServicing` cualquiera, exactamente como con
+/// `JikanService` solo.
 struct ContentRouter: ContentServicing {
     let jikan: ContentServicing
     let mal: ContentServicing
-    let session: MALSession
+    let aniList: ContentServicing
+    let account: LinkedAccount
 
-    init(session: MALSession, jikan: ContentServicing = JikanService(), mal: ContentServicing? = nil) {
-        self.session = session
+    init(
+        account: LinkedAccount,
+        jikan: ContentServicing = JikanService(),
+        mal: ContentServicing? = nil,
+        aniList: ContentServicing? = nil
+    ) {
+        self.account = account
         self.jikan = jikan
-        self.mal = mal ?? MALContentService(malSession: session)
+        self.mal = mal ?? MALContentService(malSession: account.mal)
+        self.aniList = aniList ?? AniListContentService(aniListSession: account.aniList)
+    }
+
+    private var active: ContentServicing {
+        switch account.activeProvider {
+        case .mal: mal
+        case .aniList: aniList
+        case nil: jikan
+        }
     }
 
     func topAnime(limit: Int) async throws -> [Anime] {
-        try await session.isSignedIn ? mal.topAnime(limit: limit) : jikan.topAnime(limit: limit)
+        try await active.topAnime(limit: limit)
     }
 
     func currentSeason(limit: Int) async throws -> [Anime] {
-        try await session.isSignedIn ? mal.currentSeason(limit: limit) : jikan.currentSeason(limit: limit)
+        try await active.currentSeason(limit: limit)
     }
 
     func searchAnime(
@@ -40,33 +56,30 @@ struct ContentRouter: ContentServicing {
         endDate: String?,
         limit: Int
     ) async throws -> [Anime] {
-        let route = session.isSignedIn ? mal : jikan
-        return try await route.searchAnime(
+        try await active.searchAnime(
             query: query, status: status, genres: genres, type: type,
             rating: rating, startDate: startDate, endDate: endDate, limit: limit
         )
     }
 
     func animeDetails(id: Int) async throws -> Anime {
-        try await session.isSignedIn ? mal.animeDetails(id: id) : jikan.animeDetails(id: id)
+        try await active.animeDetails(id: id)
     }
 
     func animeGenres() async throws -> [NamedEntity] {
-        try await session.isSignedIn ? mal.animeGenres() : jikan.animeGenres()
+        try await active.animeGenres()
     }
 
     func animeThemes() async throws -> [NamedEntity] {
-        try await session.isSignedIn ? mal.animeThemes() : jikan.animeThemes()
+        try await active.animeThemes()
     }
 
     func topManga(limit: Int) async throws -> [Manga] {
-        try await session.isSignedIn ? mal.topManga(limit: limit) : jikan.topManga(limit: limit)
+        try await active.topManga(limit: limit)
     }
 
     func currentlyPublishingManga(limit: Int) async throws -> [Manga] {
-        try await session.isSignedIn
-            ? mal.currentlyPublishingManga(limit: limit)
-            : jikan.currentlyPublishingManga(limit: limit)
+        try await active.currentlyPublishingManga(limit: limit)
     }
 
     func searchManga(
@@ -78,22 +91,21 @@ struct ContentRouter: ContentServicing {
         endDate: String?,
         limit: Int
     ) async throws -> [Manga] {
-        let route = session.isSignedIn ? mal : jikan
-        return try await route.searchManga(
+        try await active.searchManga(
             query: query, status: status, genres: genres, type: type,
             startDate: startDate, endDate: endDate, limit: limit
         )
     }
 
     func mangaDetails(id: Int) async throws -> Manga {
-        try await session.isSignedIn ? mal.mangaDetails(id: id) : jikan.mangaDetails(id: id)
+        try await active.mangaDetails(id: id)
     }
 
     func mangaGenres() async throws -> [NamedEntity] {
-        try await session.isSignedIn ? mal.mangaGenres() : jikan.mangaGenres()
+        try await active.mangaGenres()
     }
 
     func mangaThemes() async throws -> [NamedEntity] {
-        try await session.isSignedIn ? mal.mangaThemes() : jikan.mangaThemes()
+        try await active.mangaThemes()
     }
 }

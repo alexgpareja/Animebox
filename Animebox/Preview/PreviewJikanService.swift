@@ -123,7 +123,9 @@ nonisolated enum PreviewSamples {
                 NamedEntity(malId: 1, type: "anime", name: "Acción", url: nil),
                 NamedEntity(malId: 2, type: "anime", name: "Aventura", url: nil)
             ],
-            studios: nil
+            studios: nil,
+            aired: DateRange(from: "2020-04-05T00:00:00+00:00", to: "2020-09-27T00:00:00+00:00"),
+            relations: nil
         )
     }
 
@@ -166,7 +168,9 @@ nonisolated enum PreviewSamples {
             genres: [
                 NamedEntity(malId: 1, type: "manga", name: "Acción", url: nil),
                 NamedEntity(malId: 2, type: "manga", name: "Aventura", url: nil)
-            ]
+            ],
+            published: DateRange(from: "2018-12-03T00:00:00+00:00", to: nil),
+            relations: nil
         )
     }
 }

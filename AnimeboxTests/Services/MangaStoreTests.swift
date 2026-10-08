@@ -25,11 +25,11 @@ struct MangaStoreTests {
     func upsertCreatesEntry() throws {
         let manga = Manga.fixture(id: 1, title: "Nuevo")
         try store.upsert(
-            manga: manga, status: .reading, chaptersRead: 5, volumesRead: 1,
+            manga: manga, provider: .mal, status: .reading, chaptersRead: 5, volumesRead: 1,
             personalScore: 8, notes: "wip"
         )
 
-        let entry = try #require(store.entry(for: 1))
+        let entry = try #require(store.entry(for: 1, provider: .mal))
         #expect(entry.title == "Nuevo")
         #expect(entry.status == .reading)
         #expect(entry.chaptersRead == 5)
@@ -42,15 +42,15 @@ struct MangaStoreTests {
     func upsertUpdatesExistingEntry() throws {
         let manga = Manga.fixture(id: 1, title: "Original")
         try store.upsert(
-            manga: manga, status: .reading, chaptersRead: 5, volumesRead: 1,
+            manga: manga, provider: .mal, status: .reading, chaptersRead: 5, volumesRead: 1,
             personalScore: nil, notes: nil
         )
         try store.upsert(
-            manga: manga, status: .completed, chaptersRead: 12, volumesRead: 2,
+            manga: manga, provider: .mal, status: .completed, chaptersRead: 12, volumesRead: 2,
             personalScore: 9, notes: "great"
         )
 
-        let entry = try #require(store.entry(for: 1))
+        let entry = try #require(store.entry(for: 1, provider: .mal))
         #expect(entry.status == .completed)
         #expect(entry.chaptersRead == 12)
         #expect(entry.volumesRead == 2)
@@ -65,22 +65,22 @@ struct MangaStoreTests {
     func deleteRemovesEntry() throws {
         let manga = Manga.fixture(id: 1)
         try store.upsert(
-            manga: manga, status: .reading, chaptersRead: 0, volumesRead: 0,
+            manga: manga, provider: .mal, status: .reading, chaptersRead: 0, volumesRead: 0,
             personalScore: nil, notes: nil
         )
-        try #require(store.entry(for: 1) != nil)
+        try #require(store.entry(for: 1, provider: .mal) != nil)
 
-        try store.delete(mangaId: 1)
-        #expect(store.entry(for: 1) == nil)
+        try store.delete(mangaId: 1, provider: .mal)
+        #expect(store.entry(for: 1, provider: .mal) == nil)
     }
 
     @Test("entry(for:) devuelve nil si no existe la entrada")
     func entryReturnsNilForMissingId() {
-        #expect(store.entry(for: 999) == nil)
+        #expect(store.entry(for: 999, provider: .mal) == nil)
     }
 
     @Test("delete sobre un id inexistente no lanza error")
     func deleteOnMissingIdIsNoOp() throws {
-        try store.delete(mangaId: 999)
+        try store.delete(mangaId: 999, provider: .mal)
     }
 }

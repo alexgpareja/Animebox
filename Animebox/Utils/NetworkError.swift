@@ -17,19 +17,19 @@ enum NetworkError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            String(localized: "La URL solicitada no es válida.")
+            AppLanguage.current.string("La URL solicitada no es válida.")
         case .invalidResponse:
-            String(localized: "Respuesta inesperada del servidor.")
+            AppLanguage.current.string("Respuesta inesperada del servidor.")
         case .httpError(let code):
-            String(localized: "Error del servidor (\(code)).")
+            String(format: AppLanguage.current.string("Error del servidor (%lld)."), code)
         case .decodingFailed:
-            String(localized: "No pudimos procesar la respuesta del servidor.")
+            AppLanguage.current.string("No pudimos procesar la respuesta del servidor.")
         case .transport(let message):
             message
         case .rateLimited:
-            String(localized: "Has alcanzado el límite de peticiones. Inténtalo de nuevo en unos segundos.")
+            AppLanguage.current.string("Has alcanzado el límite de peticiones. Inténtalo de nuevo en unos segundos.")
         case .cancelled:
-            String(localized: "Petición cancelada.")
+            AppLanguage.current.string("Petición cancelada.")
         }
     }
 }

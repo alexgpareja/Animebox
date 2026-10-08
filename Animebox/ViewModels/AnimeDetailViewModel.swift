@@ -26,7 +26,7 @@ final class AnimeDetailViewModel {
     }
 
     func refreshDetails() async {
-        guard state == .idle else { return }
+        guard state != .refreshing else { return }
         state = .refreshing
         do {
             let full = try await service.animeDetails(id: anime.malId)
